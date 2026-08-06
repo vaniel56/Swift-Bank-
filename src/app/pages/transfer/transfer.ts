@@ -9,123 +9,128 @@ import { ArgumentOutOfRangeError } from 'rxjs';
 
 @Component({
   selector: 'app-transfer',
-  imports: [ NgClass, DecimalPipe, FormsModule,CommonModule], // Make sure DecimalPipe is here
+  imports: [NgClass, DecimalPipe, FormsModule, CommonModule], // Make sure DecimalPipe is here
   templateUrl: './transfer.html',
   styleUrl: './transfer.css',
 })
 export class Transfer {
- transferPage:string = "beneficiary-page";
-// private transferDetails:string = "transfer-details";
-// private transferReview:string = "transfer-review";
-// private successPage:string = "success-page"
-selectedBeneficiary: number | null = null;
+  transferPage: string = 'beneficiary-page';
+  // private transferDetails:string = "transfer-details";
+  // private transferReview:string = "transfer-review";
+  // private successPage:string = "success-page"
+  selectedBeneficiary: number | null = null;
 
-selectedBeneficiaryData: any = null;
+  selectedBeneficiaryData: any = null;
 
-beneficiaries = [
-  { name: 'Chidi Okafor', bank: 'GTBank'},
-  { name: 'Amaka Bello', bank: 'Access Bank'},
-  { name: 'Tunde Alli', bank: 'Zenith Bank' },
-];
+  beneficiaries = [
+    { name: 'Chidi Okafor', bank: 'GTBank' },
+    { name: 'Amaka Bello', bank: 'Access Bank' },
+    { name: 'Tunde Alli', bank: 'Zenith Bank' },
+  ];
 
-selectBeneficiary(index: number) {
-  if (this.selectedBeneficiary === index) {
-    this.selectedBeneficiary = null;
-  } else {
-    this.selectedBeneficiary = index;
+  selectBeneficiary(index: number) {
+    if (this.selectedBeneficiary === index) {
+      this.selectedBeneficiary = null;
+    } else {
+      this.selectedBeneficiary = index;
+    }
   }
-}
-goTotransferDetails() {
-  if (this.selectedBeneficiary !== null) {
-    this.transferPage = 'transfer-details';
-    // Store the beneficiary data to use on the transfer details page
-    this.selectedBeneficiaryData = this.beneficiaries[this.selectedBeneficiary];
+  goTotransferDetails() {
+    if (this.selectedBeneficiary !== null) {
+      this.transferPage = 'transfer-details';
+      // Store the beneficiary data to use on the transfer details page
+      this.selectedBeneficiaryData = this.beneficiaries[this.selectedBeneficiary];
+    } else {
+      alert('Please select a beneficiary before proceeding.');
+    }
   }
-}
-router = inject(Router)
+  router = inject(Router);
   savings = signal(0);
   current = signal(0);
-  transferAmount!:  string
+  transferAmount!: string;
   transferData: any = null;
   insufficientFunds: boolean = false;
- ngOnInit() {
-  // Get from localStorage or set defaults
-  const savedCurrent = localStorage.getItem('current');
-  const savedSavings = localStorage.getItem('savings');
-  
-  if (savedCurrent) {
-    this.current.set(Number(savedCurrent));
-  } 
-  
-  if (savedSavings) {
-    this.savings.set(Number(savedSavings));
-  } 
-  
-  console.log('Current balance loaded:', Number(this.current())); // Debug
-}
+  ngOnInit() {
+    // Get from localStorage or set defaults
+    const savedCurrent = localStorage.getItem('current');
+    const savedSavings = localStorage.getItem('savings');
+
+    if (savedCurrent) {
+      this.current.set(Number(savedCurrent));
+    }
+
+    if (savedSavings) {
+      this.savings.set(Number(savedSavings));
+    }
+
+    console.log('Current balance loaded:', Number(this.current())); // Debug
+  }
   note: string = '';
 
-goToTransferReview() {
-  const amount = Number(this.transferAmount); // Convert string to number
-  const currentBalance = Number(this.current()); // Get the current balance
- if (!this.transferAmount || Number(this.transferAmount) <= 0) {
-    alert('Enter valid amount');
-    return;
+  goToTransferReview() {
+    const amount = Number(this.transferAmount); // Convert string to number
+    const currentBalance = Number(this.current()); // Get the current balance
+    if (!this.transferAmount || Number(this.transferAmount) <= 0) {
+      alert('Enter valid amount');
+      return;
+    }
+
+    if (Number(this.transferAmount) > this.current()) {
+      alert('Insufficient balance');
+      return;
+    }
+    this.current.set(this.current() - Number(this.transferAmount));
+
+    this.transferPage = 'transfer-review';
+    this.transferData = {
+      beneficiary: this.selectedBeneficiaryData,
+      amount: this.transferAmount,
+      note: this.note || '---',
+    };
   }
-
-  if (Number(this.transferAmount)> this.current()) {
-    alert('Insufficient balance');
-    return;
-  }
-   this.current.set(this.current() - Number(this.transferAmount));
-
- 
-
-  this.transferPage = 'transfer-review';
-  this.transferData = {
-    beneficiary: this.selectedBeneficiaryData,
-    amount: this.transferAmount,
-    note: this.note || '---'
-  };
-}
 
   checkBalance() {
-  const amount = Number(this.transferAmount);
-  if (amount > Number(this.current()) && amount > 0) {
-    this.insufficientFunds = true;
-  } else {
+    const amount = Number(this.transferAmount);
+   
+    if (amount > Number(this.current()) && amount > 0) {
+      this.insufficientFunds = true;
+    } else {
+      this.insufficientFunds = false;
+    }
+  // This remains a clean number for easy API submissions and math
+  
+
+  }
+
+
+  confirmTransfer() {
+    let transferAmounts = this.transferAmount;
+    let currentBalance = this.current();
+    console.log('transfer amount:', transferAmounts);
+    console.log('Current balance before deduction:', currentBalance);
+
+    localStorage.setItem('current', String(this.current()));
+    console.log('Before deduction - Current:', this.current());
+    console.log('Transfer amount:', this.transferAmount);
+
+    const amount = Number(this.transferAmount);
+    this.current.set(this.current() - amount);
+
+    console.log('After deduction - Current:', this.current());
+
+    localStorage.setItem('current', this.current().toString());
+    console.log('Saved to localStorage:', localStorage.getItem('current'));
+
+    this.transferPage = 'success-page';
+  }
+
+  resetTransfer() {
+    this.transferPage = 'beneficiary-page';
+    this.transferAmount = '';
+    this.note = '';
+    this.selectedBeneficiary = null;
+    this.selectedBeneficiaryData = null;
+    this.transferData = null;
     this.insufficientFunds = false;
   }
-}
-confirmTransfer() {
-  let transferAmounts= this.transferAmount;
-  let currentBalance = this.current();
-  console.log('transfer amount:', transferAmounts);
-  console.log('Current balance before deduction:', currentBalance);
-  
-  localStorage.setItem('current', String(this.current()));
-  console.log('Before deduction - Current:', this.current());
-  console.log('Transfer amount:', this.transferAmount);
-  
-  const amount = Number(this.transferAmount);
-  this.current.set(this.current() - amount);
-  
-  console.log('After deduction - Current:', this.current());
-  
-  localStorage.setItem('current', this.current().toString());
-  console.log('Saved to localStorage:', localStorage.getItem('current'));
-  
-  
-  this.transferPage = 'success-page';
-}
-
-resetTransfer() {
-  this.transferPage = 'beneficiary-page';
-  this.transferAmount = '';
-  this.note = '';
-  this.selectedBeneficiary = null;
-  this.selectedBeneficiaryData = null;
-  this.transferData = null;
-  this.insufficientFunds = false;
-}
 }
