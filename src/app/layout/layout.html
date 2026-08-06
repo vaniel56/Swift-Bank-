@@ -1,0 +1,74 @@
+<div class="flex w-100% h-screen overflow-clip">
+  <div class="w-1/6 h-screen bg-[#121212] md:flex flex-col justify-between hidden">
+    <div>
+      <!-- Logo/Brand -->
+      <div class="py-4 px-3">
+        <div class="items-center flex text-[16px] gap-2">
+          <div class="rounded-xl pl-3 pr-3 px-1 py-1 bg-[#A6E146] font-bold text-[20px]">S</div>
+          <div class="text-white text-[0.7em] font-bold">Swift Bank</div>
+        </div>
+      </div>
+
+      <!-- Navigation - Your 5 items -->
+      <nav class="flex-1 px-3 py-4 hidden md:block">
+        <div
+          class="flex items-center gap-3 px-4 rounded-lg h-11 text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          routerLink="home"
+        >
+          <i class="fas fa-home w-4 text-[11px]"></i>
+          <span class="font-extrabold text-[11px]">Home</span>
+        </div>
+
+        <!-- Transfer -->
+        <div
+          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          routerLink="transfer"
+        >
+          <i class="fas fa-exchange-alt w-4 text-[11px]"></i>
+          <span class="font-extrabold text-[11px]">Transfer</span>
+        </div>
+
+        <!-- Paybills -->
+        <div
+          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          routerLink="paybills"
+        >
+          <i class="fas fa-file-invoice w-4 text-[11px]"></i>
+          <span class="font-extrabold text-[11px]">Paybills</span>
+        </div>
+
+        <!-- Savings -->
+        <div
+          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          routerLink="savings"
+        >
+          <i class="fas fa-piggy-bank w-4 text-[11px]"></i>
+          <span class="font-extrabold text-[11px]">Savings</span>
+        </div>
+
+        <!-- History -->
+        <div
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          routerLink="history"
+        >
+          <i class="fas fa-history w-4 text-[11px]"></i>
+          <span class="font-extrabold text-[11px]">History</span>
+        </div>
+      </nav>
+    </div>
+    <div class="md:flex items-center border-t border-t-gray-800 w-40 hidden">
+      <div
+        class="ml-5 mr-2 my-4 w-8 h-8 rounded-full bg-purple-400 flex items-center justify-center text-black font-bold text-[11px]"
+      >
+        O
+      </div>
+      <div class="flex flex-col items-start" routerLink="/login">
+        <span class="text-white text-[12px]">Olamide A.</span>
+        <button class="text-gray-500 text-[8px]">Log out</button>
+      </div>
+    </div>
+  </div>
+  <div class="h-screen w-screen bg-black">
+    <router-outlet></router-outlet>
+  </div>
+</div>

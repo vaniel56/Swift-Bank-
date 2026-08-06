@@ -1,0 +1,80 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { NgClass, CurrencyPipe, DecimalPipe } from '@angular/common';
+import { Router, RouterLink } from "@angular/router";
+
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.html',
+  styleUrl: './home.css',
+  imports: [NgClass, CurrencyPipe, DecimalPipe],
+})
+export class Home implements OnInit {
+  router = inject(Router)
+  savings = signal(0);
+  current = signal(0);
+
+  showBalance: boolean = true;
+
+
+
+  isRefreshing: boolean = false;
+  isLoading: boolean = false;
+
+  ngOnInit() {
+    //check if localStorage has values for savings and current,
+    //  if not set them to default values
+    // let savings = localStorage.getItem('savings');
+    // let current = localStorage.getItem('current');
+    // if (!savings) {
+    //   localStorage.setItem('savings', '210000'); 
+    //   this.savings.set(210000);  
+    // } else {
+    //   this.savings.set(Number(savings));
+    // }                                                        
+    //
+    //
+    console.log(localStorage.getItem('savings'))
+
+    if (localStorage.getItem('savings') === null) {
+      localStorage.setItem('savings', '210000');
+    } else {
+      this.savings.set(Number(localStorage.getItem('savings')));
+    }
+    if (localStorage.getItem('current') === null) {
+      localStorage.setItem('current', '272300');
+    } else {
+      this.current.set(Number(localStorage.getItem('current')));
+    }
+
+    // store numbers (NO commas)
+    // localStorage.setItem('savings', '210000');
+    // localStorage.setItem('current', '272300');
+
+    // // get and convert to number
+    // this.savings.set(Number(localStorage.getItem('savings')));
+    // this.current.set(Number(localStorage.getItem('current')));
+  }
+
+  // ✅ auto calculate balance
+  get balance(): number {
+    return this.savings() + this.current();
+  }
+
+  toggleBalance() {
+    this.showBalance = !this.showBalance;
+  }
+  goToTransfer() {
+    this.router.navigate(['layout/transfer'])
+  }
+
+  goToPaybills() {
+    this.router.navigate(['layout/paybills'])
+  }
+  goToSavings() {
+    this.router.navigate(['layout/savings'])
+  }
+  goToHistory() {
+    this.router.navigate(['layout/history'])
+  }
+}
