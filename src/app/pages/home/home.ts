@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { NgClass, CurrencyPipe, DecimalPipe } from '@angular/common';
-import { Router, RouterLink } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.css',
-  imports: [NgClass, CurrencyPipe, DecimalPipe, CommonModule],
+  imports: [NgClass, CurrencyPipe, DecimalPipe, CommonModule, RouterLink, RouterLinkActive],
 })
 export class Home implements OnInit {
   router = inject(Router);
@@ -16,22 +16,12 @@ export class Home implements OnInit {
   current = signal(0);
 
   showBalance: boolean = true;
+  displayTransactions: any[] = [];
   isRefreshing: boolean = false;
   isLoading: boolean = false;
-  displayTransactions: any[] = [];
-
+  transactions: any[] = [];
 
   ngOnInit() {
-     const saved = JSON.parse(localStorage.getItem('transactions') || '[]');
-
-     this.displayTransactions = saved
-       .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()) // latest first
-       .slice(0, 5) // only 5
-       .map((t: any) => ({
-         ...t,
-         sign: t.amount > 0 ? '-' : '+',
-         color: t.amount > 0 ? 'text-[#F75D59]' : 'text-[#A6E146]',
-       }));
     //check if localStorage has values for savings and current,
     //  if not set them to default values
     // let savings = localStorage.getItem('savings');
@@ -43,6 +33,19 @@ export class Home implements OnInit {
     //   this.savings.set(Number(savings));
     // }
     //
+
+    {
+      const saved = JSON.parse(localStorage.getItem('transactions') || '[]');
+
+      this.displayTransactions = saved
+        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()) // latest first
+        .slice(0, 5) // only 5
+        .map((t: any) => ({
+          ...t,
+          sign: t.amount > 0 ? '-' : '+',
+          color: t.amount > 0 ? 'text-[#F75D59]' : 'text-[#A6E146]',
+        }));
+    }
     //
     console.log(localStorage.getItem('savings'));
 
@@ -57,6 +60,7 @@ export class Home implements OnInit {
       this.current.set(Number(localStorage.getItem('current')));
     }
 
+    this.transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
 
     // store numbers (NO commas)
     // localStorage.setItem('savings', '210000');
@@ -85,10 +89,16 @@ export class Home implements OnInit {
   goToSavings() {
     this.router.navigate(['layout/savings']);
   }
+  isActive = 'home';
+
   goToHistory() {
     this.router.navigate(['layout/history']);
+    
   }
 
+  filteredTransactions() {
+    return this.transactions.filter((t) => t.amount >= 5);
+  }
 }
 
 

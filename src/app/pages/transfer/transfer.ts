@@ -21,7 +21,12 @@ export class Transfer {
   selectedBeneficiary: number | null = null;
 
   selectedBeneficiaryData: any = null;
-
+  goToHome() {
+    this.router.navigate(['layout/home']);
+  }
+  goToBeneficiary() {
+    this.transferPage = 'beneficiary-page';
+  }
   beneficiaries = [
     { name: 'Chidi Okafor', bank: 'GTBank' },
     { name: 'Amaka Bello', bank: 'Access Bank' },
@@ -127,7 +132,7 @@ export class Transfer {
 
     localStorage.setItem('current', this.current().toString());
     console.log('Saved to localStorage:', localStorage.getItem('current'));
-  this.saveTransaction();
+    this.saveTransaction();
     this.transferPage = 'success-page';
   }
   updateTransferHistory() {}
