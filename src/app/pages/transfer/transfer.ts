@@ -91,17 +91,24 @@ export class Transfer {
 
   checkBalance() {
     const amount = Number(this.transferAmount);
-   
+
     if (amount > Number(this.current()) && amount > 0) {
       this.insufficientFunds = true;
     } else {
       this.insufficientFunds = false;
     }
-  // This remains a clean number for easy API submissions and math
-  
-
   }
-
+  // Add this method to your Transfer class
+  saveTransaction() {
+    const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+    transactions.push({
+      beneficiary: this.selectedBeneficiaryData?.name || 'Unknown',
+      amount: this.transferAmount,
+      date: new Date().toLocaleString(),
+      type: 'Transfer',
+    });
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }
 
   confirmTransfer() {
     let transferAmounts = this.transferAmount;
@@ -120,9 +127,10 @@ export class Transfer {
 
     localStorage.setItem('current', this.current().toString());
     console.log('Saved to localStorage:', localStorage.getItem('current'));
-
+  this.saveTransaction();
     this.transferPage = 'success-page';
   }
+  updateTransferHistory() {}
 
   resetTransfer() {
     this.transferPage = 'beneficiary-page';
