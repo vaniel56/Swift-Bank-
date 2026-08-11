@@ -1,1 +1,86 @@
-<p>paybills works!</p>
+<div>
+  @if (paybillpage == 'paybilldetails-page') {
+    <section class="paybilldetails-page md:px-10 md:py-6 md:w-[45%] w-full p-4">
+      <p class="md:hidden pb-1 pl-2" (click)="goToHome()">
+        <i class="fa-solid fa-less-than text-gray-400"></i>
+      </p>
+      <div class="text-white font-bold text-2xl">Pay a bill</div>
+      <p class="text-[#A1A5AB] text-[15px] md:text-[10px] mt-5 md:mt-3">Biller</p>
+      <div class="text-[#A1A5AB] flex justify-between gap-2 mt-2">
+        <!-- Ikeja Electric -->
+        <div
+          (click)="selectService('ikeja')"
+          [ngClass]="
+            activeService === 'ikeja'
+              ? 'bg-[#182407] border-[#A6E146] text-[#A6E146]'
+              : 'bg-[#111419] border-[#252930]'
+          "
+          class="flex items-center flex-1 justify-center flex-col gap-2 py-3.5 md:py-3 rounded-xl border"
+        >
+          <i class="fa-solid fa-bolt text-[15px] md:text-[10px]"></i>
+          <p class="text-[12px] md:text-[8px]">Ikeja Electric</p>
+        </div>
+
+        <!-- DSTV -->
+        <div
+          (click)="selectService('dstv')"
+          [ngClass]="
+            activeService === 'dstv'
+              ? 'bg-[#182407] border-[#A6E146] text-[#A6E146]'
+              : 'bg-[#111419] border-[#252930]'
+          "
+          class="flex items-center flex-1 justify-center flex-col gap-2 py-3 rounded-xl border"
+        >
+          <i class="fa-solid fa-tv text-[15px] md:text-[10px]"></i>
+          <p class="text-[12px] md:text-[8px]">DSTV</p>
+        </div>
+
+        <!-- MTN Airtime -->
+        <div
+          (click)="selectService('mtn')"
+          [ngClass]="
+            activeService === 'mtn'
+              ? 'bg-[#182407] border-[#A6E146] text-[#A6E146]'
+              : 'bg-[#111419] border-[#252930]'
+          "
+          class="flex items-center flex-1 justify-center flex-col gap-2 py-3 rounded-xl border"
+        >
+          <i class="fa-solid fa-phone text-[15px] md:text-[10px]"></i>
+          <p class="text-[12px] md:text-[8px]">MTN Airtime</p>
+        </div>
+      </div>
+      <div class="text-white">
+        <p class="text-[15px] md:text-[10px] text-[#A1A5AB] mt-3 md:mt-2">Meter</p>
+        <input
+          type="text"
+          placeholder="04512378901"
+          class="bg-[#111419] px-3 py-3 md:py-2 text-[17px] md:text-[12px] focus:outline-none mt-1 w-full rounded-[13px] md:rounded-[10px] border border-[#252930]"
+        />
+      </div>
+      <div class="text-white">
+        <p class="text-[15px] md:text-[10px] text-[#A1A5AB] mt-3 md:mt-2">Amount</p>
+        <input
+          type="text"
+          placeholder="₦10,000"
+          class="bg-[#111419] px-3 focus:outline-none py-3 md:py-2 text-[17px] md:text-[12px] mt-1 w-full rounded-[10px] border border-[#252930]"
+        />
+           @if (insufficientFunds) {
+            <p class="text-red-500 text-[14px] md:text-[11px] mt-1">
+              Insufficient balance. Available: ₦{{ current() | number: '1.2-2' }}
+            </p>
+          }
+      </div>
+      <div class="flex gap-1 mt-4 md:mt-2 items-center">
+        <input type="checkbox" class="accent-[#A6E146] md:w-2.5 md:-2.5 w-4 h-4" />
+        <P class="text-[#A1A5AB] text-[15px] md:text-[10px]">Repeat monthly</P>
+      </div>
+      <div
+      (click)="goToSuccesful()"
+        class="w-full bg-[#A6E146] text-[17px] md:text-[12px] py-3 md:py-2 mt-6 md:mt-4 font-bold flex items-center justify-center rounded-[10px]"
+      >
+        pay bill
+      </div>
+    </section>
+  }
+  @if (paybillpage == 'succesful-page') {}
+</div>

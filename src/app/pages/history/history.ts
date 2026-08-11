@@ -39,19 +39,7 @@ export class History {
     return result;
   }
 
-  ngOnInit() {
-    {
-      const saved = JSON.parse(localStorage.getItem('transactions') || '[]');
 
-      this.displayTransactions = saved
-        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()) // latest first
-        .map((t: any) => ({
-          ...t,
-          sign: t.amount > 0 ? '-' : '+',
-          color: t.amount > 0 ? 'text-[#F75D59]' : 'text-[#A6E146]',
-        }));
-    }
-  }
   constructor(public router: Router) {}
 
   goToHome() {
