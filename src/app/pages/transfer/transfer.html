@@ -217,14 +217,14 @@
       <button
         class=" md:h-8 h-15 bg-[#A6E146] w-full md:w-full rounded-2xl md:rounded-lg text-black md:text-[12px] text-[17px] font-bold mt-5"
         (click)="confirmTransfer()"
-        (click)="updateTransferHistory()"
+      
       >
         Confirm & Send
       </button>
     </section>
   }
   @if (transferPage == 'success-page') {
-    <section class="success-page flex items-center justify-center md:pt-30 pt-10">
+    <section class="success-page flex items-center justify-center md:h-screen pt-10">
       <div
         class="md:bg-[#111419] gap-2 md:w-100 w-full h-70 rounded-lg flex flex-col items-center justify-center"
       >
@@ -249,6 +249,7 @@
         <button
           class="w-90 md:h-8 h-15 bg-[#191D24]  rounded-2xl md:rounded-lg text-white text-[17px] md:text-[12px] font-bold mt-5"
           (click)="resetTransfer()"
+          (click)="goToHome()"
         >
           Done
         </button>
