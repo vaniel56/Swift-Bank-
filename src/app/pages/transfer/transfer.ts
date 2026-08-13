@@ -1,25 +1,25 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit, inject } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { DecimalPipe } from '@angular/common';
-import { OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { inject } from '@angular/core';
-import { ArgumentOutOfRangeError } from 'rxjs';
 
 @Component({
   selector: 'app-transfer',
-  imports: [NgClass, DecimalPipe, FormsModule, CommonModule], // Make sure DecimalPipe is here
+  imports: [NgClass, DecimalPipe, FormsModule, CommonModule], // keep pipes/modules used by template
   templateUrl: './transfer.html',
-  styleUrl: './transfer.css',
+  styleUrls: ['./transfer.css'],
 })
-export class Transfer {
+export class Transfer implements OnInit {
+  // current visible page in the transfer flow
   transferPage: string = 'beneficiary-page';
   // private transferDetails:string = "transfer-details";
   // private transferReview:string = "transfer-review";
   // private successPage:string = "success-page"
+  // index of the selected beneficiary (null = none)
   selectedBeneficiary: number | null = null;
 
+  // stored data for the selected beneficiary (used on details/review)
   selectedBeneficiaryData: any = null;
   goToHome() {
     this.router.navigate(['layout/home']);
@@ -49,14 +49,19 @@ export class Transfer {
       alert('Please select a beneficiary before proceeding.');
     }
   }
+  // Angular Router (injected)
   router = inject(Router);
+
+  // reactive balances (signals)
   savings = signal(0);
   current = signal(0);
-  transferAmount!: string;
+
+  // form fields
+  transferAmount: string = '';
   transferData: any = null;
   insufficientFunds: boolean = false;
+  // Initialize component and load persisted balances
   ngOnInit() {
-    // Get from localStorage or set defaults
     const savedCurrent = localStorage.getItem('current');
     const savedSavings = localStorage.getItem('savings');
 
@@ -67,8 +72,6 @@ export class Transfer {
     if (savedSavings) {
       this.savings.set(Number(savedSavings));
     }
-
-    console.log('Current balance loaded:', Number(this.current())); // Debug
   }
   note: string = '';
 
@@ -84,8 +87,7 @@ export class Transfer {
       alert('Insufficient balance');
       return;
     }
-    this.current.set(this.current() - Number(this.transferAmount));
-
+    // Do NOT mutate balances here; only prepare the review
     this.transferPage = 'transfer-review';
     this.transferData = {
       beneficiary: this.selectedBeneficiaryData,
@@ -96,19 +98,15 @@ export class Transfer {
 
   checkBalance() {
     const amount = Number(this.transferAmount);
-
-    if (amount > Number(this.current()) && amount > 0) {
-      this.insufficientFunds = true;
-    } else {
-      this.insufficientFunds = false;
-    }
+    this.insufficientFunds = amount > this.current() && amount > 0;
   }
   // Add this method to your Transfer class
   saveTransaction() {
+    // persist a simple transaction entry
     const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
     transactions.push({
       beneficiary: this.selectedBeneficiaryData?.name || 'Unknown',
-      amount: this.transferAmount,
+      amount: Number(this.transferAmount),
       date: new Date().toLocaleString(),
       type: 'Transfer',
     });
@@ -116,26 +114,16 @@ export class Transfer {
   }
 
   confirmTransfer() {
-    let transferAmounts = this.transferAmount;
-    let currentBalance = this.current();
-    console.log('transfer amount:', transferAmounts);
-    console.log('Current balance before deduction:', currentBalance);
-
-    localStorage.setItem('current', String(this.current()));
-    console.log('Before deduction - Current:', this.current());
-    console.log('Transfer amount:', this.transferAmount);
-
+    // perform the final transfer: deduct balance, persist, and record transaction
     const amount = Number(this.transferAmount);
     this.current.set(this.current() - amount);
-
-    console.log('After deduction - Current:', this.current());
-
+    // persist updated balance
     localStorage.setItem('current', this.current().toString());
-    console.log('Saved to localStorage:', localStorage.getItem('current'));
+    // save transaction for history
     this.saveTransaction();
     this.transferPage = 'success-page';
   }
-  updateTransferHistory() {}
+  // resetTransfer clears the form and returns user to beneficiary selection
 
   resetTransfer() {
     this.transferPage = 'beneficiary-page';

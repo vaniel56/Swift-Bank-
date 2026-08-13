@@ -8,10 +8,13 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterLink, RouterOutlet],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
-  
 })
 export class Layout {
+  activeService = 'home';
 
+  selectService(service: string) {
+    this.activeService = service;
+  }
 }
 
 

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { NgClass, CurrencyPipe, DecimalPipe } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.css',
-  imports: [NgClass, CurrencyPipe, DecimalPipe, CommonModule, RouterLink, RouterLinkActive],
+  imports: [NgClass, CurrencyPipe, DecimalPipe, CommonModule, RouterLink],
 })
 export class Home implements OnInit {
   router = inject(Router);
