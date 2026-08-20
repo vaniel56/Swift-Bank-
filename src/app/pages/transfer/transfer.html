@@ -1,0 +1,259 @@
+<div class="md:px-10 md:py-6 text-white font-inter p-4">
+  @if (transferPage == 'beneficiary-page') {
+    <section class="beneficiary-page">
+      <p (click)="goToHome()" class="md:hidden pb-1 pl-2">
+        <i class="fa-solid fa-less-than text-gray-400"></i>
+      </p>
+      <h1 class="text-white font-bold text-2xl">Send money</h1>
+      <p class="text-[#7D8086] text-[15px] mt-1">Step 1 of 3 Choose recipient</p>
+      <div class="hidden gap-2 mt-5 md:flex">
+        <hr class="w-15 h-1 bg-[#A6E146] border border-[#A6E146] rounded-2xl" />
+        <hr class="w-15 h-1 bg-[#121212] border border-[#121212] rounded-2xl" />
+        <hr class="w-15 h-1 bg-[#121212] border border-[#121212] rounded-2xl" />
+      </div>
+      <div class="flex flex-col mt-5 md:w-[45%] border border-[#1E1E1E] rounded-xl bg-[#111419]">
+        <!-- Beneficiary 1 -->
+        <span
+          class="flex justify-between md:p-3 p-5 cursor-pointer rounded-t-xl"
+          (click)="selectBeneficiary(0)"
+          [ngClass]="selectedBeneficiary === 0 ? 'bg-[#1E1E1E]' : 'bg-transparent'"
+        >
+          <div class="flex gap-2 items-center">
+            <i class="fa-solid fa-circle-user text-[#20242B] text-2xl"></i>
+            <div>
+              <h1 class="text-[12px]">Chidi Okafor</h1>
+              <p class="text-[10px] text-gray-400">GTBank</p>
+            </div>
+          </div>
+          <label class="inline-flex items-center justify-center">
+            <input type="checkbox" class="hidden peer" [checked]="selectedBeneficiary === 0" />
+            <div
+              class="w-3.5 h-3.5 rounded-full border-2 border-[#A6E146] flex items-center justify-center transition-all bg-[#121212]"
+            >
+              <svg
+                class="w-3 h-3 text-[#A6E146]"
+                [class.opacity-100]="selectedBeneficiary === 0"
+                [class.opacity-0]="selectedBeneficiary !== 0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+          </label>
+        </span>
+
+        <!-- Beneficiary 2 -->
+        <span
+          class="flex justify-between md:p-3 p-5 cursor-pointer border-t border-[#1E1E1E]"
+          (click)="selectBeneficiary(1)"
+          [ngClass]="selectedBeneficiary === 1 ? 'bg-[#1E1E1E]' : 'bg-transparent'"
+        >
+          <div class="flex gap-2 items-center">
+            <i class="fa-solid fa-circle-user text-[#20242B] text-2xl"></i>
+            <div>
+              <h1 class="text-[12px]">Amaka Bello</h1>
+              <p class="text-[10px] text-gray-400">Access Bank</p>
+            </div>
+          </div>
+          <label class="inline-flex items-center justify-center">
+            <input type="checkbox" class="hidden peer" [checked]="selectedBeneficiary === 0" />
+            <div
+              class="w-3.5 h-3.5 rounded-full border-2 border-[#A6E146] flex items-center justify-center transition-all bg-[#121212]"
+            >
+              <svg
+                class="w-3 h-3 text-[#A6E146]"
+                [class.opacity-100]="selectedBeneficiary === 1"
+                [class.opacity-0]="selectedBeneficiary !== 1"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+          </label>
+        </span>
+
+        <!-- Beneficiary 3 -->
+        <span
+          class="flex justify-between md:p-3 p-5 cursor-pointer border-t border-[#1E1E1E] rounded-b-xl"
+          (click)="selectBeneficiary(2)"
+          [ngClass]="selectedBeneficiary === 2 ? 'bg-[#1E1E1E]' : 'bg-transparent'"
+        >
+          <div class="flex gap-2 items-center">
+            <i class="fa-solid fa-circle-user text-[#20242B] text-2xl"></i>
+            <div>
+              <h1 class="text-[12px]">Tunde Alli</h1>
+              <p class="text-[10px] text-gray-400">Zenith Bank</p>
+            </div>
+          </div>
+          <label class="inline-flex items-center justify-center">
+            <input type="checkbox" class="hidden peer" [checked]="selectedBeneficiary === 0" />
+            <div
+              class="w-3.5 h-3.5 rounded-full border-2 border-[#A6E146] flex items-center justify-center transition-all bg-[#121212]"
+            >
+              <svg
+                class="w-3 h-3 text-[#A6E146]"
+                [class.opacity-100]="selectedBeneficiary === 2"
+                [class.opacity-0]="selectedBeneficiary !== 2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+          </label>
+        </span>
+      </div>
+      <button
+        class="mt-6 md:mt-4 md:w-[45%] h-14 md:h-10 bg-[#A6E146] text-[17px] md:text-[12px] font-bold text-black md:rounded-lg w-full rounded-2xl"
+        (click)="goTotransferDetails()"
+      >
+        Continue
+      </button>
+    </section>
+  }
+  @if (transferPage == 'transfer-details') {
+    <section class="transfer-details">
+      <div class="md:w-[45%] w-full">
+        <p (click)="goToBeneficiary()" class="md:hidden pb-1 pl-2">
+          <i class="fa-solid fa-less-than text-gray-400"></i>
+        </p>
+        <h1 class="font-bold text-2xl">Send money</h1>
+        <p class="text-[#7D8086] text-[15px] mt-1">Step 2 of 3·Amount</p>
+        <div class="md:flex gap-2 mt-5 hidden">
+          <hr class="w-15 h-1 bg-[#A6E146] border border-[#A6E146] rounded-2xl" />
+          <hr class="w-15 h-1 bg-[#A6E146] border border-[#A6E146] rounded-2xl" />
+          <hr class="w-15 h-1 bg-[#121212] border border-[#121212] rounded-2xl" />
+        </div>
+        <P class="text-[14px] md:text-[11px] text-gray-400 mt-3">From</P>
+        <div class="bg-[#111419]  rounded-[10px] flex items-center text-[14px] md:text-[11px] mt-2 md:h-8 h-12 ">
+          <p class="ml-3">Current · ₦{{ current() | number: '1.2-2' }}</p>
+        </div>
+        <P class="text-[14px] md:text-[11px] text-gray-400 mt-2">To</P>
+        <div class="bg-[#111419]  rounded-[10px] flex items-center text-[14px] md:text-[11px] mt-2 md:h-8 h-12">
+          <p class="ml-3 flex items-center gap-1">
+            <i class="fa-solid fa-circle-user text-[#20242B] text-[20px]"></i>
+            {{ selectedBeneficiaryData?.name }} · {{ selectedBeneficiaryData?.bank }}
+          </p>
+        </div>
+        <div class="mt-2">
+          <p class="text-[14px] md:text-[11px] text-gray-400">Amount</p>
+          <input
+            type="text"
+            class="bg-[#191d24] w-full  focus:outline-none  mt-2 rounded-[10px] flex items-center text-[20px] md:text-[15px] font-extrabold md:p-2 p-3  border border-[#2E333B] text-white"
+            placeholder="₦0.00"
+            [(ngModel)]="transferAmount"
+            (input)="checkBalance()"
+          />
+          @if (insufficientFunds) {
+            <p class="text-red-500 text-[14px] md:text-[11px] mt-1">
+              Insufficient balance. Available: ₦{{ current() | number: '1.2-2' }}
+            </p>
+          }
+        </div>
+        <div>
+          <div class="mt-2 flex flex-col">
+            <label class="text-[14px] md:text-[11px] text-gray-400">Note (optional)</label>
+            <input
+              type="text"
+              placeholder="What's this for?"
+              [(ngModel)]="note"
+              class=" md:p-2 p-3 bg-[#191D24] mt-2 border text-[15px] md:text-[11px] border-[#2E333B] focus:outline-none rounded-xl md:rounded-lg text-white"
+            />
+          </div>
+        </div>
+        <button
+          class=" md:h-10 h-15 w-full bg-[#A6E146] md:rounded-lg rounded-2xl text-black  text-[17px] md:text-[12px] font-bold mt-5"
+          (click)="goToTransferReview()"
+        >
+          Review Transfer
+        </button>
+      </div>
+    </section>
+  }
+  @if (transferPage == 'transfer-review') {
+     <p (click)="goTotransferDetails()" class="md:hidden pb-1 pl-2">
+          <i class="fa-solid fa-less-than text-gray-400"></i>
+        </p>
+    <p class="text-2xl">Review transfer:</p>
+    <section class="transfer-review  w-full md:w-[45%]">
+      <p class="text-[#7D8086] text-[15px] mt-1">Step 3 of 3 · Confirm</p>
+      <div class=" gap-2 mt-5 hidden md:flex">
+        <hr class="w-15 h-1 bg-[#A6E146] border border-[#A6E146] rounded-2xl" />
+        <hr class="w-15 h-1 bg-[#A6E146] border border-[#A6E146] rounded-2xl" />
+        <hr class="w-15 h-1 bg-[#A6E146] border border-[#A6E146] rounded-2xl" />
+      </div>
+      <div class=" bg-[#111419] px-4 p-2  border border-[#252930] rounded-lg mt-3">
+        <div class="flex justify-between py-1">
+          <p class="text-gray-400 text-[14px] md:text-[11px]">To</p>
+          <p class="text-[14px] md:text-[11px] font-bold">
+            {{ transferData?.beneficiary?.name }} · {{ transferData?.beneficiary?.bank }}
+          </p>
+        </div>
+        <div class="flex justify-between border-t border-[#252930] py-3">
+          <p class="text-gray-400 text-[14px] md:text-[11px]">From</p>
+          <p class="text-[14px] md:text-[11px] font-bold">Current</p>
+        </div>
+        <div class="flex justify-between border-t border-[#252930] py-3">
+          <p class="text-gray-400 text-[14px] md:text-[11px]">Amount</p>
+          <p class="text-[14px] md:text-[11px] font-bold">₦{{ transferData?.amount }}</p>
+        </div>
+        <div class="flex justify-between border-t border-[#252930] py-3">
+          <p class="text-gray-400 text-[14px] md:text-[11px]">Fee</p>
+          <p class="text-[14px] md:text-[11px] font-bold">₦0.00</p>
+        </div>
+        <div class="flex justify-between border-t border-[#252930] py-3">
+          <p class="text-gray-400 text-[14px] md:text-[11px]">Note</p>
+          <p class="text-[14px] md:text-[11px] font-bold">{{ transferData?.note }}</p>
+        </div>
+      </div>
+      <button
+        class=" md:h-8 h-15 bg-[#A6E146] w-full md:w-full rounded-2xl md:rounded-lg text-black md:text-[12px] text-[17px] font-bold mt-5"
+        (click)="confirmTransfer()"
+      
+      >
+        Confirm & Send
+      </button>
+    </section>
+  }
+  @if (transferPage == 'success-page') {
+    <section class="success-page flex items-center justify-center md:h-screen ">
+      <div
+        class="md:bg-[#111419] gap-2 md:w-100 w-full h-70 rounded-lg flex flex-col items-center justify-center"
+      >
+        <div class="w-20 h-20 rounded-full bg-[#A6E146] flex items-center justify-center shadow-lg">
+          <!-- dark checkmark SVG -->
+          <svg
+            class="w-8 h-8"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#1e293b"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="4,12 10,18 20,6" />
+          </svg>
+        </div>
+        <div class="font-bold text-2xl">Transfer Successful</div>
+        <p class="text-[15px] text-[#9B9FA5]">
+          ₦{{ transferData?.amount }} sent to {{ transferData?.beneficiary?.name }}
+        </p>
+        <button
+          class="w-90 md:h-8 h-15 bg-[#191D24]  rounded-2xl md:rounded-lg text-white text-[17px] md:text-[12px] font-bold mt-5"
+          (click)="resetTransfer()"
+          (click)="goToHome()"
+        >
+          Done
+        </button>
+      </div>
+    </section>
+  }
+</div>

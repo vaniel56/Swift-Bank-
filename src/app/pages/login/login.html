@@ -1,0 +1,69 @@
+<div class=" bg-black w-100%  md:h-screen px-3 sm:flex sm:flex-col sm:justify-center sm:items-center sm:h-screen ">
+  <div class="sm:bg-[#121212] sm:px-5 sm:h-155  sm:rounded-[13px] md:w-75 md:pt-3 md:h-105 md:px-6 md:mt-14   px-1.5 sm:w-100 ">
+<div class="min-h-screen md:min-h-0 md:mt-5 flex flex-col justify-between pb-8 sm:min-h-0 ">
+      <div class="mt-10 md:mt-0">
+        <span class="rounded-2xl pl-6 pr-6 pt-3 pb-3 bg-[#A6E146] font-bold text-[25px] md:pl-3.5 md:pr-3.5 md:pt-2 md:pb-2 md:text-[15px] md:rounded-[10px]">S</span>
+        <h1 class="text-white text-[25px] font-bold mt-7 md:mt-3 md:text-[17px]">Welcome back</h1>
+        <p class="text-gray-400 text-[15px] mt-3 md:mt-1 md:text-[10px]">Log in to SwiftBank</p>
+
+        <div>
+          <form class="w-full mt-1 flex flex-col gap-1" [formGroup]="empForm">
+            <p class="text-gray-400 text-[15px] mt-5 md:mt-2 md:text-[10px]">Email</p>
+            <input
+              type="email"
+              placeholder="name@gmail.com"
+              class="w-full h-14 md:h-8 rounded-[15px] focus:outline-none md:rounded-[9px] pl-3 bg-[#1E2128] text-white md:text-[10px] text-[15px] border border-gray-700 mt-2 md:mt-0"
+              formControlName="email"
+            />
+            <div class="text-red-500 text-[10px]" *ngIf="empForm.get('email')?.invalid && empForm.get('email')?.touched">
+              Please enter a valid email address
+            </div>
+            
+            <div class="w-full">
+              <p class="text-gray-400 text-[15px] w-full md:text-[10px] md:mt-0 mt-2">Password</p>
+              <div class="relative flex items-center justify-between">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  placeholder="•••••••"
+                  class="w-full h-14 md:h-8 rounded-[15px] md:rounded-[9px] md:mt-1 mt-2 pl-3 pr-10 focus:outline-none bg-[#1E2128] text-white md:text-[10px] text-[15px] border border-gray-700"
+                  formControlName="password"
+                />
+                <button
+                  type="button"
+                  (click)="showPassword = !showPassword"
+                  class="absolute right-3 md:mb-2 md:text-[10px]  mt-2 text-gray-400 hover:text-white md:mt-3 sm:mt-2"
+                >
+                  <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+                </button>
+              </div>
+              <div *ngIf="empForm.get('password')?.invalid && empForm.get('password')?.touched" class="text-red-500 text-[10px] ">
+                <span *ngIf="empForm.get('password')?.errors?.['minlength']">Minimum 6 characters required</span>
+                <span *ngIf="empForm.get('password')?.errors?.['required']">Password is required</span>
+              </div>
+            </div>
+          </form>
+          
+          <div class="flex flex-row justify-between w-full md:mt-2 mt-4">
+            <div class="flex items-center gap-1 text-[30px] md:text-[12px]">
+              <input type="checkbox" id="remember" class="md:w-2.5 md:h-2.5 accent-[#A6E146] w-4 h-4 " />
+              <label for="remember" class="text-gray-500 text-[15px] md:text-[10px]">Remember me</label>
+            </div>
+            <p class="text-purple-500 md:text-[10px] text-[15px]">Forget password?</p>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <button
+          type="submit"
+          [ngClass]="{ 'opacity-50 ': empForm.invalid }"
+          class="w-full bg-[#A6E146] text-black py-2 rounded-[15px] h-14  md:rounded-[9px]  text-[20px] md:h-8 md:text-[10px] font-bold cursor-pointer md:mt-4"
+          (click)="onLoginUser()"
+          [disabled]="empForm.invalid"
+        >
+          Log in
+        </button>
+      </div>
+    </div>
+    </div>
+  </div>

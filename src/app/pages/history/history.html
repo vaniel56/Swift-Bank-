@@ -1,0 +1,70 @@
+<div class="flex justify-between flex-col h-screen">
+  <div class="md:px-10 md:py-6 px-4 py-4 w-full">
+    <div class="text-white pb-4 font-extrabold  text-2xl">Transaction history</div>
+   <div class="md:flex gap-3 flex flex-col ">
+     <input 
+      type="text" 
+      [(ngModel)]="searchTerm" 
+      placeholder="Search transactions"
+      class="md:w-[35%]  md:p-2 bg-[#111419] text-white text-[17px] py-4 pl-3 w-full md:text-[10px] outline-none  rounded-2xl md:rounded-lg border border-[#1E1E1E] "
+    />
+<div class="flex gap-3">
+   <button 
+  (click)="setFilter('all')" 
+  [ngClass]="filter === 'all' ? 'bg-[#A6E146]' : 'bg-[#111419]'" 
+  class="md:text-[10px] md:py-1 md:px-3 text-[15px] py-2 px-5 rounded-2xl text-white">
+  All
+</button>
+
+<button 
+  (click)="setFilter('in')" 
+  [ngClass]="filter === 'in' ? 'bg-[#A6E146]' : 'bg-[#111419]'" 
+  class="md:text-[10px] md:py-1 md:px-3 text-[15px] py-2 px-5 rounded-2xl text-white">
+ 
+  Money in
+</button>
+
+<button 
+  (click)="setFilter('out')" 
+  [ngClass]="filter === 'out' ? 'bg-[#A6E146]' : 'bg-[#111419]'" 
+  class="md:text-[10px] md:py-1 md:px-3 text-[15px] py-2 px-5 rounded-2xl text-white">
+
+  Money out
+</button>
+</div>
+  
+   </div>   
+
+    <div class="rounded-3xl bg-[#111419] w-full border border-[#1E1E1E] p-5 md:mt-3 mt-5 md:h-100 h-full overflow-y-auto hide-scrollbar ">
+      <!-- Add min-height to force items to take space -->
+        <div *ngFor="let transaction of filteredTransactions()" class="flex justify-between py-2 border-b border-b-[#1E1E1E]">
+          
+          <div class="text-white text-[12px]">
+            <h1>{{ transaction.beneficiary }}</h1>
+            <p class="text-gray-500 text-[10px]">{{ transaction.date }}</p>
+          </div>
+          <div class="font-bold text-[15px] py-2" [ngClass]="transaction.color">
+            {{ transaction.sign }}₦{{ transaction.amount | number:'1.2-2' }}
+          </div>
+        </div>
+     \
+    </div>
+</div><div>
+      <div class="flex justify-between items-center px-17 md:hidden border-t border-t-gray-800">
+    <div
+      class="flex items-center flex-col gap-1 px-4 rounded-lg text-gray-600 "
+      (click)="goToHome()"
+    >
+      <i class="fas fa-home w-4 text-[15px]"></i>
+      <span class="font-extrabold text-[11px]">Home</span>
+    </div>
+    <div
+      class="flex items-center flex-col gap-1 px-4 py-3 rounded-lg text-[#A6E146]"
+  
+    >
+      <i class="fas fa-history w-4 text-[15px]"></i>
+      <span class="font-extrabold text-[11px]">History</span>
+    </div>
+  </div>
+</div>
+</div>
