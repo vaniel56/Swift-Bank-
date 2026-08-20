@@ -44,11 +44,11 @@ export class Paybills {
     localStorage.setItem('transactions', JSON.stringify(transactions));
   }
   goToSuccesful() {
-    if(this.activeService ==''){
-      disabled
+  
+   const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
+  const amount = Number(cleanAmount);
 
-    }
-    if (!this.meterNumber || Number(this.meterNumber) <= 9) {
+    if (!this.meterNumber || Number(this.meterNumber) <= 290) {
       this.invalidMeterNumber = true;
       return;
     } else {
@@ -62,7 +62,7 @@ export class Paybills {
       this.invalidMeterAmount = false;
     }
 
-    const amount = Number(this.meterAmount);
+  
 
     if (amount > this.current()) {
       this.insufficientFunds = true;
@@ -97,7 +97,14 @@ export class Paybills {
   }
 
   checkBalance() {
-    const amount = Number(this.meterAmount);
+     const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
+  const amount = Number(cleanAmount);
+
+  // Show ₦ and commas
+if (amount > 0) {
+  this.meterAmount = '₦' + amount.toLocaleString('en-NG');
+}
+  
 
     if (amount > Number(this.current()) && amount > 0) {
       this.insufficientFunds = true;

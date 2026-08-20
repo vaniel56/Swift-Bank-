@@ -6,19 +6,19 @@
       type="text" 
       [(ngModel)]="searchTerm" 
       placeholder="Search transactions"
-      class="md:w-[35%]  md:p-2 bg-[#121212] text-white text-[17px] py-4 pl-3 w-full md:text-[10px] outline-none  rounded-2xl md:rounded-lg border border-[#1E1E1E] "
+      class="md:w-[35%]  md:p-2 bg-[#111419] text-white text-[17px] py-4 pl-3 w-full md:text-[10px] outline-none  rounded-2xl md:rounded-lg border border-[#1E1E1E] "
     />
 <div class="flex gap-3">
    <button 
   (click)="setFilter('all')" 
-  [ngClass]="filter === 'all' ? 'bg-[#A6E146]' : 'bg-[#1E1E1E]'" 
+  [ngClass]="filter === 'all' ? 'bg-[#A6E146]' : 'bg-[#111419]'" 
   class="md:text-[10px] md:py-1 md:px-3 text-[15px] py-2 px-5 rounded-2xl text-white">
   All
 </button>
 
 <button 
   (click)="setFilter('in')" 
-  [ngClass]="filter === 'in' ? 'bg-[#A6E146]' : 'bg-[#1E1E1E]'" 
+  [ngClass]="filter === 'in' ? 'bg-[#A6E146]' : 'bg-[#111419]'" 
   class="md:text-[10px] md:py-1 md:px-3 text-[15px] py-2 px-5 rounded-2xl text-white">
  
   Money in
@@ -26,7 +26,7 @@
 
 <button 
   (click)="setFilter('out')" 
-  [ngClass]="filter === 'out' ? 'bg-[#A6E146]' : 'bg-[#1E1E1E]'" 
+  [ngClass]="filter === 'out' ? 'bg-[#A6E146]' : 'bg-[#111419]'" 
   class="md:text-[10px] md:py-1 md:px-3 text-[15px] py-2 px-5 rounded-2xl text-white">
 
   Money out
@@ -35,7 +35,7 @@
   
    </div>   
 
-    <div class="rounded-3xl bg-[#121212] w-full border border-[#1E1E1E] p-5 md:mt-3 mt-5 md:h-100 h-165 overflow-y-auto hide-scrollbar ">
+    <div class="rounded-3xl bg-[#111419] w-full border border-[#1E1E1E] p-5 md:mt-3 mt-5 md:h-100 h-full overflow-y-auto hide-scrollbar ">
       <!-- Add min-height to force items to take space -->
         <div *ngFor="let transaction of filteredTransactions()" class="flex justify-between py-2 border-b border-b-[#1E1E1E]">
           

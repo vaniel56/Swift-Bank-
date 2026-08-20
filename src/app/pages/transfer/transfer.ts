@@ -78,7 +78,8 @@ export class Transfer implements OnInit {
   goToTransferReview() {
     const amount = Number(this.transferAmount); // Convert string to number
     const currentBalance = Number(this.current()); // Get the current balance
-    if (!this.transferAmount || Number(this.transferAmount) <= 0) {
+
+     if (!amount || amount <= 0) {
       alert('Enter valid amount');
       return;
     }
