@@ -20,19 +20,16 @@ export class Home implements OnInit {
   isRefreshing: boolean = false;
   isLoading: boolean = false;
   transactions: any[] = [];
-
+   // Savings goal
+  savedAmount = 310000;
+  targetAmount = 500000;
   ngOnInit() {
-    //check if localStorage has values for savings and current,
-    //  if not set them to default values
-    // let savings = localStorage.getItem('savings');
-    // let current = localStorage.getItem('current');
-    // if (!savings) {
-    //   localStorage.setItem('savings', '210000');
-    //   this.savings.set(210000);
-    // } else {
-    //   this.savings.set(Number(savings));
-    // }
-    //
+  
+     const saved = localStorage.getItem('savedAmount');
+
+  if (saved) {
+    this.savedAmount = Number(saved);
+  }
 
     {
       const saved = JSON.parse(localStorage.getItem('transactions') || '[]');
@@ -60,15 +57,7 @@ export class Home implements OnInit {
       this.current.set(Number(localStorage.getItem('current')));
     }
 
-    this.transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
-
-    // store numbers (NO commas)
-    // localStorage.setItem('savings', '210000');
-    // localStorage.setItem('current', '272300');
-
-    // // get and convert to number
-    // this.savings.set(Number(localStorage.getItem('savings')));
-    // this.current.set(Number(localStorage.getItem('current')));
+    this.transactions = JSON.parse(localStorage.getItem('transactions') || '[]');;
   }
 
   // ✅ auto calculate balance
@@ -99,6 +88,14 @@ export class Home implements OnInit {
   filteredTransactions() {
     return this.transactions.filter((t) => t.amount >= 5);
   }
+    get progress(): number {
+    return Math.min(
+      (this.savedAmount / this.targetAmount) * 100,
+      100
+    );
+  }
+  
+
 }
 
 

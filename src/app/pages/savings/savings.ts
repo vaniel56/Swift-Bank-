@@ -1,15 +1,16 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-savings',
-  imports: [DecimalPipe, FormsModule],
+  imports: [DecimalPipe, FormsModule,],
   templateUrl: './savings.html',
   styleUrls: ['./savings.css'],
 })
 export class Savings implements OnInit {
+
   savingspage: string = 'savingsdetails-page';
   savings = signal(0);
   savingsAmount!: string;
@@ -17,54 +18,125 @@ export class Savings implements OnInit {
   insufficientFunds = false
 
   constructor(private router: Router) {}
+
+  // Savings goal
+  savedAmount = 310000;
+  targetAmount = 500000;
+
   
-  // `router` is now injected via the constructor
 
   ngOnInit() {
+
+    // Get savings balance
     const savedSavings = localStorage.getItem('savings');
+
     if (savedSavings) {
       this.savings.set(Number(savedSavings));
     }
-  }
-  goToSucceful() {
-    const amount = Number(this.savingsAmount); // Convert string to number
-    const currentBalance = Number(this.savings()); // Get the current balance
-    if (!this.savingsAmount || Number(this.savingsAmount) <= 0) {
-      alert('Enter valid amount');
-      return;
+
+    // Get savings goal amount
+    const savedGoal = localStorage.getItem('savedAmount');
+
+    if (savedGoal) {
+      this.savedAmount = Number(savedGoal);
     }
-    this.savings.set(this.savings() - amount);
-    // persist updated balance
-    localStorage.setItem('savings', this.savings().toString());
-    this.saveTransaction();
-
-    this.savingspage = 'success-page';
   }
 
+  // Calculate progress percentage
+  get progress(): number {
+    return Math.min(
+      (this.savedAmount / this.targetAmount) * 100,
+      100
+    );
+  }
+  
+goToSucceful() {
+  // Remove ₦ and commas
+  const cleanAmount = this.savingsAmount.replace(/[₦,]/g, '');
+
+  // Convert to number
+  const amount = Number(cleanAmount);
+    console.log(typeof(amount));
+
+  if (!amount || amount <= 0) {
+    alert('Enter valid amount');
+    return;
+  }
+
+  if (amount > this.savings()) {
+    this.insufficientFunds = true;
+    return;
+  }
+
+  this.insufficientFunds = false;
+
+  // Remove amount from savings
+  this.savings.update(value => value - amount);
+
+  // Save updated savings
+  localStorage.setItem(
+    'savings',
+    this.savings().toString()
+  );
+
+  // Add amount to savings goal
+  this.savedAmount += amount;
+
+  // Save updated goal
+  localStorage.setItem(
+    'savedAmount',
+    this.savedAmount.toString()
+  );
+
+  // Save transaction
+  this.saveTransaction();
+
+  // Go to success page
+  this.savingspage = 'success-page';
+}
   goToHome() {
     this.router.navigate(['layout/home']);
   }
-  saveTransaction() {
-    const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
 
-    transactions.push({
-      beneficiary: 'Added to new laptop fund',
-      amount: Number(this.savingsAmount),
-      date: new Date().toISOString(),
-      type: 'savings',
-    });
+saveTransaction() {
+  // Remove ₦ and commas
+  const cleanAmount = this.savingsAmount.replace(/[₦,]/g, '');
 
-    localStorage.setItem('transactions', JSON.stringify(transactions));
+  const amount = Number(cleanAmount);
 
-    console.log('Transaction saved:', transactions);
+  const transactions = JSON.parse(
+    localStorage.getItem('transactions') || '[]'
+  );
+
+  transactions.push({
+    beneficiary: 'Added to new laptop fund',
+    amount: amount, // Saves only the number
+    date: new Date().toISOString(),
+    type: 'savings',
+  });
+
+  localStorage.setItem(
+    'transactions',
+    JSON.stringify(transactions)
+  );
+
+  console.log('Transaction saved:', transactions);
+}
+checkBalance() {
+  // Remove ₦ and commas before converting to number
+  const cleanAmount = this.savingsAmount.replace(/[₦]/g, '');
+  const amount = Number(cleanAmount);
+
+  // Show ₦ and commas
+if (amount > 0) {
+  this.savingsAmount = '₦' + amount.toLocaleString('en-NG');
+}
+  // Check balance
+  if (amount > this.savings() && amount > 0) {
+    this.insufficientFunds = true;
+  } else {
+    this.insufficientFunds = false;
   }
-  checkBalance() {
-    const amount = Number(this.savingsAmount);
+}
 
-    if (amount > Number(this.savings()) && amount > 0) {
-      this.insufficientFunds = true;
-    } else {
-      this.insufficientFunds = false;
-    }
-  }
 }
