@@ -76,15 +76,15 @@ export class Transfer implements OnInit {
   note: string = '';
 
   goToTransferReview() {
-    const amount = Number(this.transferAmount); // Convert string to number
-    const currentBalance = Number(this.current()); // Get the current balance
-
+ const currentBalance = Number(this.current()); // Get the current balance
+const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
+const amount = Number(cleanAmount);
      if (!amount || amount <= 0) {
       alert('Enter valid amount');
       return;
     }
 
-    if (Number(this.transferAmount) > this.current()) {
+    if (amount > this.current()) {
       alert('Insufficient balance');
       return;
     }
@@ -98,16 +98,23 @@ export class Transfer implements OnInit {
   }
 
   checkBalance() {
-    const amount = Number(this.transferAmount);
+ const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
+  const amount = Number(cleanAmount);
+  // Show ₦ and commas
+if (amount > 0) {
+  this.transferAmount = '₦' + amount.toLocaleString('en-NG');
+}
     this.insufficientFunds = amount > this.current() && amount > 0;
   }
   // Add this method to your Transfer class
   saveTransaction() {
+         const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
+    const amount = Number(cleanAmount);
     // persist a simple transaction entry
     const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
     transactions.push({
       beneficiary: this.selectedBeneficiaryData?.name || 'Unknown',
-      amount: Number(this.transferAmount),
+      amount: Number(amount),
       date: new Date().toLocaleString(),
       type: 'Transfer',
     });
@@ -115,8 +122,9 @@ export class Transfer implements OnInit {
   }
 
   confirmTransfer() {
+     const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
+  const amount = Number(cleanAmount);
     // perform the final transfer: deduct balance, persist, and record transaction
-    const amount = Number(this.transferAmount);
     this.current.set(this.current() - amount);
     // persist updated balance
     localStorage.setItem('current', this.current().toString());

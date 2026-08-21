@@ -22,7 +22,7 @@ export class Paybills {
   meterData: any = null;
   selectedServiceData: any = null;
   selectedServiceIndex: number | null = null;
-  activeService = 'DSTV';
+  activeService = '';
   service = [{ service: 'Ikeja Electric' }, { service: 'DSTV' }, { service: 'MTN Airtime' }];
   constructor(private router: Router) {}
 
@@ -34,35 +34,40 @@ export class Paybills {
     this.router.navigate(['layout/home']);
   }
   saveTransaction() {
+       const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
+  const amount = Number(cleanAmount);
     const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
     transactions.push({
       beneficiary: this.selectedServiceData?.service || 'Unknown',
-      amount: this.meterAmount,
+      amount: amount,
       date: new Date().toLocaleString(),
       type: 'bills',
     });
     localStorage.setItem('transactions', JSON.stringify(transactions));
   }
   goToSuccesful() {
-  
+        if (this.selectedServiceData?.service == null) {
+          alert('Select a biller');
+        } else {
+          this.paybillpage = 'succesful-page';
+        }
    const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
   const amount = Number(cleanAmount);
 
-    if (!this.meterNumber || Number(this.meterNumber) <= 290) {
+    if (!this.meterNumber || Number(this.meterNumber) <= 9) {
       this.invalidMeterNumber = true;
       return;
     } else {
       this.invalidMeterNumber = false;
     }
 
-    if (!this.meterAmount || Number(this.meterAmount) <= 0) {
+    if (!amount || Number(amount) <= 0) {
       this.invalidMeterAmount = true;
       return;
     } else {
       this.invalidMeterAmount = false;
     }
 
-  
 
     if (amount > this.current()) {
       this.insufficientFunds = true;
@@ -76,7 +81,6 @@ export class Paybills {
     this.current.set(newBalance);
     localStorage.setItem('current', newBalance.toString());
 
-    this.paybillpage = 'succesful-page';
 
     this.meterData = {
       service: this.selectedServiceData,
