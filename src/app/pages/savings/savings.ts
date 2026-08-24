@@ -1,11 +1,11 @@
 import { Component, signal, OnInit } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-savings',
-  imports: [DecimalPipe, FormsModule,],
+  imports: [CommonModule, DecimalPipe, FormsModule,],
   templateUrl: './savings.html',
   styleUrls: ['./savings.css'],
 })

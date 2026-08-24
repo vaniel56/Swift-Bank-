@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { disabled } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-paybills',
-  imports: [DecimalPipe, FormsModule],
+  imports: [DecimalPipe, NgClass, FormsModule],
   templateUrl: './paybills.html',
   styleUrl: './paybills.css',
 })
@@ -19,40 +19,40 @@ export class Paybills {
   current = signal(0);
   meterAmount!: string;
   meterNumber = '';
+  label: string = 'meter';
   meterData: any = null;
-  selectedServiceData: any = null;
+  selectedServiceData: { service: string; label: string; placeholder: string } = {
+    service: 'Ikeja Electric',
+    label: 'meter',
+    placeholder: '12345678988',
+  };
   selectedServiceIndex: number | null = null;
-  activeService = '';
-  service = [{ service: 'Ikeja Electric' }, { service: 'DSTV' }, { service: 'MTN Airtime' }];
+  activeService = 'Ikeja Electric';
+  service = [
+    { service: 'Ikeja Electric', label: 'meter', placeholder: '12345678988' },
+    { service: 'DSTV', label: 'Device ID', placeholder: '123456789888484' },
+    { service: 'MTN Airtime', label: 'Phone.NO', placeholder: '0901234567' },
+  ];
   constructor(private router: Router) {}
 
   selectService(service: string) {
     this.activeService = service;
-    this.selectedServiceData = { service: service };
+    this.selectedServiceData = this.service.find((item) => item.service === service) ?? {
+      service: 'Ikeja Electric',
+      label: 'meter',
+      placeholder: '12345678988',
+    };
+    this.label = this.selectedServiceData.label;
+    this.placeholder = this.selectedServiceData.placeholder;
   }
+  placeholder: string = this.selectedServiceData.placeholder;
+
   goToHome() {
     this.router.navigate(['layout/home']);
   }
-  saveTransaction() {
-       const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
-  const amount = Number(cleanAmount);
-    const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
-    transactions.push({
-      beneficiary: this.selectedServiceData?.service || 'Unknown',
-      amount: amount,
-      date: new Date().toLocaleString(),
-      type: 'bills',
-    });
-    localStorage.setItem('transactions', JSON.stringify(transactions));
-  }
   goToSuccesful() {
-        if (this.selectedServiceData?.service == null) {
-          alert('Select a biller');
-        } else {
-          this.paybillpage = 'succesful-page';
-        }
-   const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
-  const amount = Number(cleanAmount);
+    const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
+    const amount = Number(cleanAmount);
 
     if (!this.meterNumber || Number(this.meterNumber) <= 9) {
       this.invalidMeterNumber = true;
@@ -68,10 +68,14 @@ export class Paybills {
       this.invalidMeterAmount = false;
     }
 
-
     if (amount > this.current()) {
       this.insufficientFunds = true;
       return;
+    }
+    if (this.selectedServiceData?.service == null) {
+      alert('Select a biller');
+    } else {
+      this.paybillpage = 'succesful-page';
     }
 
     this.insufficientFunds = false;
@@ -81,14 +85,26 @@ export class Paybills {
     this.current.set(newBalance);
     localStorage.setItem('current', newBalance.toString());
 
-
     this.meterData = {
       service: this.selectedServiceData,
       meterAmount: this.meterAmount,
     };
-    this.saveTransaction()
+    this.saveTransaction();
   }
 
+
+  saveTransaction() {
+    const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
+    const amount = Number(cleanAmount);
+    const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+    transactions.push({
+      beneficiary: this.selectedServiceData?.service || 'Unknown',
+      amount: amount,
+      date: new Date().toLocaleString(),
+      type: 'bills',
+    });
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }
   ngOnInit() {
     const savedCurrent = localStorage.getItem('current');
 
@@ -101,14 +117,13 @@ export class Paybills {
   }
 
   checkBalance() {
-     const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
-  const amount = Number(cleanAmount);
+    const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
+    const amount = Number(cleanAmount);
 
-  // Show ₦ and commas
-if (amount > 0) {
-  this.meterAmount = '₦' + amount.toLocaleString('en-NG');
-}
-  
+    // Show ₦ and commas
+    if (amount > 0) {
+      this.meterAmount = '₦' + amount.toLocaleString('en-NG');
+    }
 
     if (amount > Number(this.current()) && amount > 0) {
       this.insufficientFunds = true;

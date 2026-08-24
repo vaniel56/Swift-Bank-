@@ -40,7 +40,7 @@ export class Transfer implements OnInit {
       this.selectedBeneficiary = index;
     }
   }
-  goTotransferDetails() {
+  goToTransferDetails() {
     if (this.selectedBeneficiary !== null) {
       this.transferPage = 'transfer-details';
       // Store the beneficiary data to use on the transfer details page
@@ -79,6 +79,7 @@ export class Transfer implements OnInit {
  const currentBalance = Number(this.current()); // Get the current balance
 const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
 const amount = Number(cleanAmount);
+
      if (!amount || amount <= 0) {
       alert('Enter valid amount');
       return;

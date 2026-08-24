@@ -1,29 +1,27 @@
 <div class="md:px-10 md:py-6 text-white font-inter p-4">
   @if (savingspage == 'savingsdetails-page') {
     <section class="savingsdetails-page">
-        <p (click)="goToHome()" class="md:hidden pb-1 pl-2">
+      <p (click)="goToHome()" class="md:hidden pb-1 pl-2">
         <i class="fa-solid fa-less-than text-gray-400"></i>
       </p>
       <div class="md:w-[45%] w-full">
         <div class="font-bold text-2xl">Savings goal</div>
-      <div
-  class="md:w-full sm:w-[90%] bg-[#111419] border border-[#1E1E1E] rounded-2xl mt-6 p-3 flex flex-col gap-2"
->
-  <h1 class="font-bold text-white text-[15px] md:text-[11px]">
-    New laptop fund
-  </h1>
+        <div
+          class="md:w-full sm:w-[90%] bg-[#111419] border border-[#1E1E1E] rounded-2xl mt-6 p-3 flex flex-col gap-2"
+        >
+          <h1 class="font-bold text-white text-[15px] md:text-[11px]">New laptop fund</h1>
 
-  <div class="md:h-1.5 h-2 bg-gray-500 rounded-2xl relative">
-    <span
-      class="h-2 md:h-1.5 bg-[#A6E146] rounded-2xl absolute"
-      [style.width.%]="progress"
-    ></span>
-  </div>
+          <div class="md:h-1.5 h-2 bg-gray-500 rounded-2xl relative">
+            <span
+              class="h-2 md:h-1.5 bg-[#A6E146] rounded-2xl absolute"
+              [style.width.%]="progress"
+            ></span>
+          </div>
 
-  <p class="text-[13px] md:text-[10px] text-gray-400">
-    ₦{{ savedAmount | number }} of ₦{{ targetAmount | number }}. Dec 2026
-  </p>
-</div>
+          <p class="text-[13px] md:text-[10px] text-gray-400">
+            ₦{{ savedAmount | number }} of ₦{{ targetAmount | number }}. Dec 2026
+          </p>
+        </div>
         <div>
           <p class="text-[14px] md:text-[11px] text-gray-400 mt-5 md:mt-3">Fund from</p>
           <div>
@@ -38,20 +36,25 @@
           <p class="text-[14px] md:text-[11px] text-gray-400 md:mt-3 mt-4">Amount to add</p>
           <input
             type="text"
-            placeholder= "₦20,000"
+            placeholder="₦20,000"
             (input)="checkBalance()"
             [(ngModel)]="savingsAmount"
-            class="bg-[#191d24] w-full focus:outline-none mt-2 rounded-[10px] flex items-center text-[20px] md:text-[15px] font-extrabold md:p-2  p-3 border border-[#2E333B] text-white"
+            class="bg-[#191d24] w-full focus:outline-none mt-2 rounded-[10px] flex items-center text-[20px] md:text-[15px] font-extrabold md:p-2 p-3 border border-[#2E333B] text-white"
           />
-            @if (insufficientFunds) {
-          <p class="text-red-500 text-[14px] md:text-[11px] mt-1">
-            Insufficient balance. Available: ₦{{ savings() | number: '1.2-2' }}
-          </p>}
+          @if (insufficientFunds) {
+            <p class="text-red-500 text-[14px] md:text-[11px] mt-1">
+              Insufficient balance. Available: ₦{{ savings() | number: '1.2-2' }}
+            </p>
+          }
         </div>
-      
+
         <div
-          (click)="goToSucceful()"
-                    class="md:p-3 p-4 font-extrabold w-full bg-[#A6E146] md:rounded-lg rounded-2xl text-black text-[17px] md:text-[12px] mt-6 md:mt-5 flex justify-center items-center"
+          (click)="savingsAmount && goToSucceful()"
+          [ngClass]="{
+            'opacity-20 cursor-not-allowed': !savingsAmount,
+            'opacity-100 cursor-pointer': savingsAmount,
+          }"
+          class="md:p-3 p-4 font-extrabold w-full bg-[#A6E146] md:rounded-lg rounded-2xl text-black text-[17px] md:text-[12px] mt-6 md:mt-5 flex justify-center items-center"
         >
           Add funds
         </div>
@@ -59,9 +62,8 @@
     </section>
   }
   @if (savingspage == 'success-page') {
-    <section class="flex  items-center justify-center md:h-screen ">
-      
-        <div
+    <section class="flex items-center justify-center md:h-screen">
+      <div
         class="md:bg-[#111419] gap-2 md:w-100 w-full h-70 rounded-lg flex flex-col items-center justify-center"
       >
         <div class="w-20 h-20 rounded-full bg-[#A6E146] flex items-center justify-center shadow-lg">
@@ -79,11 +81,9 @@
           </svg>
         </div>
         <div class="font-bold text-2xl">Transfer Successful</div>
-        <p class="text-[15px] text-[#9B9FA5]">
-          {{ savingsAmount }} added to New laptop fund
-        </p>
+        <p class="text-[15px] text-[#9B9FA5]">{{ savingsAmount }} added to New laptop fund</p>
         <button
-          class="w-90 md:h-8 h-15 bg-[#191D24]  rounded-2xl md:rounded-lg text-white text-[17px] md:text-[12px] font-bold mt-5"
+          class="w-90 md:h-8 h-15 bg-[#191D24] rounded-2xl md:rounded-lg text-white text-[17px] md:text-[12px] font-bold mt-5"
           (click)="goToHome()"
         >
           Done
