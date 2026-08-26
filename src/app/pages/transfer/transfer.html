@@ -180,7 +180,6 @@
         <button
           class="md:h-10 h-15 w-full bg-[#A6E146] md:rounded-lg rounded-2xl text-black text-[17px] md:text-[12px] font-bold mt-5"
           (click)="goToTransferReview()"
-          (click)="transferAmount && goToTransferDetails()"
           [ngClass]="{
             'opacity-20 cursor-not-allowed': !transferAmount,
             'opacity-100 cursor-pointer': transferAmount,

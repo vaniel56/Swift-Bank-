@@ -84,11 +84,11 @@
         <P class="text-[#A1A5AB] text-[15px] md:text-[10px]">Repeat monthly</P>
       </div>
   <div
-  (click)="meterAmount && goToSuccesful()"
-  [ngClass]="{
-    'opacity-20 cursor-not-allowed': !meterAmount,
-    'opacity-100 cursor-pointer': meterAmount
-  }"
+  (click)="goToSuccesful()"
+ [ngClass]="{
+  'opacity-20 cursor-not-allowed': !meterAmount || !meterNumber,
+  'opacity-100 cursor-pointer': meterAmount && meterNumber
+}"
   class="w-full bg-[#A6E146] text-[17px] md:text-[12px] py-3 md:py-2 mt-6 md:mt-4 font-bold flex items-center justify-center rounded-[10px]"
 >
   pay bill

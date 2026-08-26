@@ -51,17 +51,17 @@ export class Paybills {
     this.router.navigate(['layout/home']);
   }
   goToSuccesful() {
-    const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
-    const amount = Number(cleanAmount);
+      const cleaned = this.meterAmount.replace(/[₦,]/g, '');
+      const amount = Number(cleaned);
 
-    if (!this.meterNumber || Number(this.meterNumber) <= 9) {
+    if (!amount|| amount <= 9) {
       this.invalidMeterNumber = true;
       return;
     } else {
       this.invalidMeterNumber = false;
     }
 
-    if (!amount || Number(amount) <= 0) {
+    if (!amount || amount <= 0) {
       this.invalidMeterAmount = true;
       return;
     } else {
@@ -94,8 +94,8 @@ export class Paybills {
 
 
   saveTransaction() {
-    const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
-    const amount = Number(cleanAmount);
+    const cleaned = this.meterAmount.replace(/[₦,]/g, '');
+    const amount = Number(cleaned);
     const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
     transactions.push({
       beneficiary: this.selectedServiceData?.service || 'Unknown',
@@ -117,13 +117,11 @@ export class Paybills {
   }
 
   checkBalance() {
-    const cleanAmount = this.meterAmount.replace(/[₦]/g, '');
-    const amount = Number(cleanAmount);
-
-    // Show ₦ and commas
-    if (amount > 0) {
-      this.meterAmount = '₦' + amount.toLocaleString('en-NG');
-    }
+     const raw = this.meterAmount || '';
+     const amount = Number(raw.replace(/[^0-9.]/g, ''));
+     if (amount > 0) {
+       this.meterAmount = '₦' + amount.toLocaleString('en-NG');
+     }
 
     if (amount > Number(this.current()) && amount > 0) {
       this.insufficientFunds = true;

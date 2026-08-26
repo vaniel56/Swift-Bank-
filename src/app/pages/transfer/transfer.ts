@@ -3,6 +3,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { raceWith } from 'rxjs';
 
 @Component({
   selector: 'app-transfer',
@@ -76,11 +77,10 @@ export class Transfer implements OnInit {
   note: string = '';
 
   goToTransferReview() {
- const currentBalance = Number(this.current()); // Get the current balance
-const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
-const amount = Number(cleanAmount);
+    const cleaned = this.transferAmount.replace(/[₦,]/g, '');
+    const amount = Number(cleaned);
 
-     if (!amount || amount <= 0) {
+    if (!amount || amount <= 0) {
       alert('Enter valid amount');
       return;
     }
@@ -89,8 +89,8 @@ const amount = Number(cleanAmount);
       alert('Insufficient balance');
       return;
     }
-    // Do NOT mutate balances here; only prepare the review
     this.transferPage = 'transfer-review';
+    console.log(this.transferPage);
     this.transferData = {
       beneficiary: this.selectedBeneficiaryData,
       amount: this.transferAmount,
@@ -99,23 +99,22 @@ const amount = Number(cleanAmount);
   }
 
   checkBalance() {
- const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
-  const amount = Number(cleanAmount);
-  // Show ₦ and commas
-if (amount > 0) {
-  this.transferAmount = '₦' + amount.toLocaleString('en-NG');
-}
+    const raw = this.transferAmount || '';
+    const amount = Number(raw.replace(/[^0-9.]/g, ''));
+    if (amount > 0) {
+      this.transferAmount = '₦' + amount.toLocaleString('en-NG');
+    }
     this.insufficientFunds = amount > this.current() && amount > 0;
   }
   // Add this method to your Transfer class
   saveTransaction() {
-         const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
-    const amount = Number(cleanAmount);
+    const cleaned = this.transferAmount.replace(/[₦,]/g, '');
+    const amount = Number(cleaned);
     // persist a simple transaction entry
     const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
     transactions.push({
       beneficiary: this.selectedBeneficiaryData?.name || 'Unknown',
-      amount: Number(amount),
+      amount: amount,
       date: new Date().toLocaleString(),
       type: 'Transfer',
     });
@@ -123,8 +122,8 @@ if (amount > 0) {
   }
 
   confirmTransfer() {
-     const cleanAmount = this.transferAmount.replace(/[₦]/g, '');
-  const amount = Number(cleanAmount);
+    const cleaned = this.transferAmount.replace(/[₦,]/g, '');
+    const amount = Number(cleaned);
     // perform the final transfer: deduct balance, persist, and record transaction
     this.current.set(this.current() - amount);
     // persist updated balance
