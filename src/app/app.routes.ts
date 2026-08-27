@@ -1,9 +1,12 @@
+/*
+  App routing table.
+  Routes under 'layout' are children rendered inside the `Layout` component.
+  Keep route paths in sync with nav links in `layout.html`.
+*/
 import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
 import { Home } from './pages/home/home';
 import { Layout } from './layout/layout';
-import { PathLocationStrategy } from '@angular/common';
-import { Component } from '@angular/core';
 import { Transfer } from './pages/transfer/transfer';
 import { Paybills } from './pages/paybills/paybills';
 import { Savings } from './pages/savings/savings';

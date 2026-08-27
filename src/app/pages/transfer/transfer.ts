@@ -1,9 +1,14 @@
+/*
+  Transfer flow component.
+  - Manages a multi-step transfer: select beneficiary -> details -> review -> success.
+  - Persists balances and transactions to localStorage.
+  Notes: input formatting is handled manually; ensure consistent formatting/parsing.
+*/
 import { Component, signal, OnInit, inject } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { raceWith } from 'rxjs';
 
 @Component({
   selector: 'app-transfer',
@@ -142,5 +147,13 @@ export class Transfer implements OnInit {
     this.selectedBeneficiaryData = null;
     this.transferData = null;
     this.insufficientFunds = false;
+  }
+  
+  allowNumbersOnly(event: KeyboardEvent) {
+    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+
+    if (!/[0-9]/.test(event.key) && !allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
   }
 }

@@ -6,6 +6,7 @@
       </p>
       <div class="text-white font-bold text-2xl">Pay a bill</div>
       <p class="text-[#A1A5AB] text-[15px] md:text-[10px] mt-5 md:mt-3">Biller</p>
+    <!-- Paybills UI: select biller, enter meter/amount, confirm -->
       <div class="text-[#A1A5AB] flex justify-between gap-2 mt-2">
         <!-- Ikeja Electric -->
         <div
@@ -54,6 +55,7 @@
         <input
           type="text"
           placeholder="{{ placeholder }}"
+          (keydown)="allowNumbersOnly($event)"
           [(ngModel)]="meterNumber"
           class="bg-[#191D24] px-3 py-3 md:py-2 text-[17px] md:text-[12px] focus:outline-none mt-1 w-full rounded-[13px] md:rounded-[10px] border border-[#252930]"
         />
@@ -68,6 +70,7 @@
           placeholder="₦10,000"
           (input)="checkBalance()"
           [(ngModel)]="meterAmount"
+          (keydown)="allowNumbersOnly($event)"
           class="bg-[#191D24] px-3 focus:outline-none py-3 md:py-2 text-[17px] md:text-[12px] mt-1 w-full rounded-[10px] border border-[#252930]"
         />
         @if (insufficientFunds) {
@@ -83,16 +86,16 @@
         <input type="checkbox" class="accent-[#A6E146] md:w-2.5 md:-2.5 w-4 h-4" />
         <P class="text-[#A1A5AB] text-[15px] md:text-[10px]">Repeat monthly</P>
       </div>
-  <div
-  (click)="goToSuccesful()"
- [ngClass]="{
-  'opacity-20 cursor-not-allowed': !meterAmount || !meterNumber,
-  'opacity-100 cursor-pointer': meterAmount && meterNumber
-}"
-  class="w-full bg-[#A6E146] text-[17px] md:text-[12px] py-3 md:py-2 mt-6 md:mt-4 font-bold flex items-center justify-center rounded-[10px]"
->
-  pay bill
-</div>
+      <div
+        (click)="goToSuccesful()"
+        [ngClass]="{
+          'opacity-20 cursor-not-allowed': !meterAmount || !meterNumber,
+          'opacity-100 cursor-pointer': meterAmount && meterNumber,
+        }"
+        class="w-full bg-[#A6E146] text-[17px] md:text-[12px] py-3 md:py-2 mt-6 md:mt-4 font-bold flex items-center justify-center rounded-[10px]"
+      >
+        pay bill
+      </div>
     </section>
   }
   @if (paybillpage == 'succesful-page') {
@@ -114,7 +117,7 @@
             <polyline points="4,12 10,18 20,6" />
           </svg>
         </div>
-        <div class="font-bold text-2xl text-white">Transfer Successful</div>
+        <div class="font-bold text-2xl text-white">Payment Succeful</div>
         <p class="text-[15px] text-[#9B9FA5]">
           {{ meterData?.meterAmount }} paid to {{ meterData?.service?.service }}
         </p>

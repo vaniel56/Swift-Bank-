@@ -1,3 +1,4 @@
+<!-- Transfer flow pages (beneficiary -> details -> review -> success) -->
 <div class="md:px-10 md:py-6 text-white font-inter p-4">
   @if (transferPage == 'beneficiary-page') {
     <section class="beneficiary-page">
@@ -158,6 +159,7 @@
             class="bg-[#191d24] w-full focus:outline-none mt-2 rounded-[10px] flex items-center text-[20px] md:text-[15px] font-extrabold md:p-2 p-3 border border-[#2E333B] text-white"
             placeholder="₦0.00"
             [(ngModel)]="transferAmount"
+            (keydown)="allowNumbersOnly($event)"
             (input)="checkBalance()"
           />
           @if (insufficientFunds) {

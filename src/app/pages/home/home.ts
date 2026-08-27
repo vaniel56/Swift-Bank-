@@ -1,3 +1,9 @@
+/*
+  Home dashboard component.
+  - Shows balances, quick actions and recent transactions.
+  - Reads balances and transactions from localStorage.
+  Potential issue: be careful with direct localStorage parsing and number conversions.
+*/
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { NgClass, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -7,7 +13,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrls: ['./home.css'],
   imports: [NgClass, CurrencyPipe, DecimalPipe, CommonModule, RouterLink],
 })
 export class Home implements OnInit {

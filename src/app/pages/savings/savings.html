@@ -1,5 +1,6 @@
 <div class="md:px-10 md:py-6 text-white font-inter p-4">
   @if (savingspage == 'savingsdetails-page') {
+<!-- Savings UI: add to savings goal and view progress -->
     <section class="savingsdetails-page">
       <p (click)="goToHome()" class="md:hidden pb-1 pl-2">
         <i class="fa-solid fa-less-than text-gray-400"></i>
@@ -39,6 +40,7 @@
             placeholder="₦20,000"
             (input)="checkBalance()"
             [(ngModel)]="savingsAmount"
+          (keydown)="allowNumbersOnly($event)"
             class="bg-[#191d24] w-full focus:outline-none mt-2 rounded-[10px] flex items-center text-[20px] md:text-[15px] font-extrabold md:p-2 p-3 border border-[#2E333B] text-white"
           />
           @if (insufficientFunds) {
@@ -80,7 +82,7 @@
             <polyline points="4,12 10,18 20,6" />
           </svg>
         </div>
-        <div class="font-bold text-2xl">Transfer Successful</div>
+        <div class="font-bold text-2xl">Funds Added</div>
         <p class="text-[15px] text-[#9B9FA5]">{{ savingsAmount }} added to New laptop fund</p>
         <button
           class="w-90 md:h-8 h-15 bg-[#191D24] rounded-2xl md:rounded-lg text-white text-[17px] md:text-[12px] font-bold mt-5"

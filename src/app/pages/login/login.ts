@@ -1,3 +1,8 @@
+/*
+  Login component.
+  - Simple form with client-side credential check (demo only).
+  - NOTE: real apps should not store credentials in code and must use secure auth.
+*/
 import { Component, inject } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormGroup, FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
@@ -7,7 +12,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-login',
   imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrls: ['./login.css'],
 })
 export class Login {
   showPassword: boolean = false;

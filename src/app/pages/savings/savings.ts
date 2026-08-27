@@ -1,3 +1,8 @@
+/*
+  Savings component.
+  - Manages adding funds to a savings goal and persisting changes to localStorage.
+  - Be careful with `savingsAmount` initial value access; ensure it's set before use.
+*/
 import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -113,6 +118,14 @@ export class Savings implements OnInit {
       this.insufficientFunds = true;
     } else {
       this.insufficientFunds = false;
+    }
+  }
+  
+  allowNumbersOnly(event: KeyboardEvent) {
+    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+
+    if (!/[0-9]/.test(event.key) && !allowedKeys.includes(event.key)) {
+      event.preventDefault();
     }
   }
 }

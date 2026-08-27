@@ -1,3 +1,8 @@
+/*
+  History component.
+  - Displays transactions from localStorage with filtering and search.
+  - Uses simple client-side filtering; large datasets may need pagination.
+*/
 import { Component } from '@angular/core';
 import { NgClass, NgFor, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +13,7 @@ import { Router } from '@angular/router';
   selector: 'app-history',
   imports: [NgClass, NgFor, DecimalPipe, FormsModule],
   templateUrl: './history.html',
-  styleUrl: './history.css',
+  styleUrls: ['./history.css'],
 })
 export class History {
   searchTerm: string = '';

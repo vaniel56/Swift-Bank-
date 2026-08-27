@@ -1,3 +1,8 @@
+/*
+  App root component.
+  - Boots the application and provides the main application shell.
+  Notes: simple signal for app title.
+*/
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -6,7 +11,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   protected readonly title = signal('swift-bank');

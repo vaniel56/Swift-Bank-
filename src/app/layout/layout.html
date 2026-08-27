@@ -1,3 +1,4 @@
+<!-- Layout shell: sidebar navigation + router outlet -->
 <div class="flex w-100% h-screen overflow-clip">
   <div class="w-1/6 h-screen bg-[#111419] md:flex flex-col justify-between hidden">
     <div>
@@ -11,27 +12,20 @@
 
       <!-- Navigation - Your 5 items -->
       <nav class="flex-1 px-3 py-4 hidden md:block">
-     <div
-       (click)="selectService('home')"
-    [class]="activeService === 'home'
-      ? 'text-lime-300 bg-[#1E1E1E]  '
-      : 'text-gray-600'"
-  routerLink="home"
-  class="flex items-center gap-3 px-4 rounded-lg h-11 text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
->
-        
+        <div
+          routerLink="home"
+          class="flex items-center gap-3 px-4 rounded-lg h-11 text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          [ngClass]="activeService === 'home' ? 'text-lime-300 bg-[#1E1E1E]' : 'text-gray-600'"
+        >
           <i class="fas fa-home w-4 text-[11px]"></i>
           <span class="font-extrabold text-[11px]">Home</span>
         </div>
 
         <!-- Transfer -->
         <div
-          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
           routerLink="transfer"
-             (click)="selectService('transfer')"
-    [class]="activeService === 'transfer'
-      ? 'text-lime-300 bg-[#1E1E1E]  '
-      : 'text-gray-600'"
+          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          [ngClass]="activeService === 'transfer' ? 'text-lime-300 bg-[#1E1E1E]' : 'text-gray-600'"
         >
           <i class="fas fa-exchange-alt w-4 text-[11px]"></i>
           <span class="font-extrabold text-[11px]">Transfer</span>
@@ -39,12 +33,9 @@
 
         <!-- Paybills -->
         <div
-          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
           routerLink="paybills"
-             (click)="selectService('paybills')"
-    [class]="activeService === 'paybills'
-      ? 'text-lime-300 bg-[#1E1E1E]  '
-      : 'text-gray-600'"
+          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          [ngClass]="activeService === 'paybills' ? 'text-lime-300 bg-[#1E1E1E]' : 'text-gray-600'"
         >
           <i class="fas fa-file-invoice w-4 text-[11px]"></i>
           <span class="font-extrabold text-[11px]">Paybills</span>
@@ -52,12 +43,9 @@
 
         <!-- Savings -->
         <div
-          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
           routerLink="savings"
-             (click)="selectService('savings')"
-    [class]="activeService === 'savings'
-      ? 'text-lime-300 bg-[#1E1E1E]  '
-      : 'text-gray-600'"
+          class="md:flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          [ngClass]="activeService === 'savings' ? 'text-lime-300 bg-[#1E1E1E]' : 'text-gray-600'"
         >
           <i class="fas fa-piggy-bank w-4 text-[11px]"></i>
           <span class="font-extrabold text-[11px]">Savings</span>
@@ -65,12 +53,9 @@
 
         <!-- History -->
         <div
-          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
           routerLink="history"
-             (click)="selectService('history')"
-    [class]="activeService === 'history'
-      ? 'text-lime-300 bg-[#1E1E1E]  '
-      : 'text-gray-600'"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#1E1E1E] hover:text-[#A6E146] cursor-pointer"
+          [ngClass]="activeService === 'history' ? 'text-lime-300 bg-[#1E1E1E]' : 'text-gray-600'"
         >
           <i class="fas fa-history w-4 text-[11px]"></i>
           <span class="font-extrabold text-[11px]">History</span>

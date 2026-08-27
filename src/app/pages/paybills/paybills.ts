@@ -1,15 +1,19 @@
+/*
+  Paybills component.
+  - Handles biller selection, input formatting and persisting transactions.
+  - Validates meter/amount and updates balances in localStorage.
+*/
 import { Component } from '@angular/core';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { disabled } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-paybills',
   imports: [DecimalPipe, NgClass, FormsModule],
   templateUrl: './paybills.html',
-  styleUrl: './paybills.css',
+  styleUrls: ['./paybills.css'],
 })
 export class Paybills {
   paybillpage: string = 'paybilldetails-page';
@@ -51,10 +55,10 @@ export class Paybills {
     this.router.navigate(['layout/home']);
   }
   goToSuccesful() {
-      const cleaned = this.meterAmount.replace(/[₦,]/g, '');
-      const amount = Number(cleaned);
+    const cleaned = this.meterAmount.replace(/[₦,]/g, '');
+    const amount = Number(cleaned);
 
-    if (!amount|| amount <= 9) {
+    if (!amount || amount <= 9) {
       this.invalidMeterNumber = true;
       return;
     } else {
@@ -92,7 +96,6 @@ export class Paybills {
     this.saveTransaction();
   }
 
-
   saveTransaction() {
     const cleaned = this.meterAmount.replace(/[₦,]/g, '');
     const amount = Number(cleaned);
@@ -117,16 +120,24 @@ export class Paybills {
   }
 
   checkBalance() {
-     const raw = this.meterAmount || '';
-     const amount = Number(raw.replace(/[^0-9.]/g, ''));
-     if (amount > 0) {
-       this.meterAmount = '₦' + amount.toLocaleString('en-NG');
-     }
+    const raw = this.meterAmount || '';
+    const amount = Number(raw.replace(/[^0-9.]/g, ''));
+    if (amount > 0) {
+      this.meterAmount = '₦' + amount.toLocaleString('en-NG');
+    }
 
     if (amount > Number(this.current()) && amount > 0) {
       this.insufficientFunds = true;
     } else {
       this.insufficientFunds = false;
+    }
+  }
+
+  allowNumbersOnly(event: KeyboardEvent) {
+    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+
+    if (!/[0-9]/.test(event.key) && !allowedKeys.includes(event.key)) {
+      event.preventDefault();
     }
   }
 }
