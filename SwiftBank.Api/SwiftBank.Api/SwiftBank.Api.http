@@ -1,0 +1,6 @@
+@SwiftBank.Api_HostAddress = http://localhost:5062
+
+GET {{SwiftBank.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
