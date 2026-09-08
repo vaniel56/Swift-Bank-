@@ -123,6 +123,7 @@ export class Transfer implements OnInit {
       date: new Date().toLocaleString(),
       type: 'Transfer',
     });
+    transactions.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()) // latest first
     localStorage.setItem('transactions', JSON.stringify(transactions));
   }
 
