@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="SwiftBank.Application/SwiftBank.Application.csproj" />
+  <Project Path="SwiftBank.Domain/SwiftBank.Domain.csproj" />
+  <Project Path="SwiftBank.Infrastructure/SwiftBank.Infrastructure.csproj" />
+  <Project Path="SwiftBank.Tests/SwiftBank.Tests.csproj" />
+  <Project Path="SwiftBank_Api/SwiftBank_Api.csproj" />
+</Solution>
