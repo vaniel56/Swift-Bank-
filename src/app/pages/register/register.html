@@ -1,0 +1,120 @@
+<div class="bg-black w-full min-h-screen flex items-center justify-center px-3 py-6">
+
+  <div class="w-full max-w-md bg-[#121212] rounded-[13px] px-6 py-8
+              md:w-75 md:h-130 md:px-6 md:pt-8 md:pb-6
+              sm:w-100 sm:px-5 sm:rounded-[13px]">
+
+    <!-- Logo -->
+    <span class="inline-block rounded-2xl px-5 py-3 bg-[#A6E146] font-bold text-[25px]
+                 md:px-3.5 md:py-2 md:text-[15px] md:rounded-[10px]">
+      S
+    </span>
+
+    <!-- Heading -->
+    <h1 class="text-white text-[25px] font-bold mt-7 md:mt-4 md:text-[18px]">
+      Create your account
+    </h1>
+    <p class="text-gray-400 text-[15px] mt-3 md:mt-1 md:text-[11px]">
+      Join SwiftBank in less than a minute
+    </p>
+
+    <!-- Form -->
+    <form (ngSubmit)="onSubmit()" #regForm="ngForm" class="w-full mt-6 md:mt-4 flex flex-col gap-3 md:gap-2">
+
+      <!-- First + Last name -->
+      <div class="flex gap-3 md:gap-2">
+        <div class="flex-1">
+          <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">First name</p>
+          <input
+            id="firstName" type="text"
+            [(ngModel)]="firstName" name="firstName"
+            placeholder="John" required
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3
+                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
+                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
+        </div>
+
+        <div class="flex-1">
+          <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">Last name</p>
+          <input
+            id="lastName" type="text"
+            [(ngModel)]="lastName" name="lastName"
+            placeholder="Doe" required
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3
+                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
+                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">Email</p>
+        <input
+          id="email" type="email"
+          [(ngModel)]="email" name="email"
+          placeholder="name@gmail.com" required
+          class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3
+                 bg-[#1E2128] text-white text-[15px] md:text-[12px]
+                 border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">Password</p>
+        <div class="relative flex items-center">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password" name="password"
+            placeholder="••••••••" required
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 pr-10
+                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
+                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
+          <button type="button" (click)="showPassword = !showPassword"
+                  class="absolute right-3 text-gray-400 hover:text-white md:text-[11px]">
+            <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Confirm password -->
+      <div>
+        <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">Confirm password</p>
+        <div class="relative flex items-center">
+          <input
+            id="confirmPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            [(ngModel)]="confirmPassword" name="confirmPassword"
+            placeholder="••••••••" required
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 pr-10
+                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
+                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
+          <button type="button" (click)="showConfirmPassword = !showConfirmPassword"
+                  class="absolute right-3 text-gray-400 hover:text-white md:text-[11px]">
+            <i [class]="showConfirmPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit" [disabled]="loading"
+        class="w-full bg-[#A6E146] text-black py-2 rounded-[15px] h-14
+               md:rounded-[9px] md:h-9 md:text-[12px]
+               text-[18px] font-bold cursor-pointer mt-3 md:mt-2
+               hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition">
+        {{ loading ? 'Creating account...' : 'Create account' }}
+      </button>
+
+      <!-- Sign in link -->
+      <p class="text-gray-400 text-[15px] md:text-[10px] mt-2 flex items-center justify-between">
+        Already have an account?
+        <button type="button" (click)="goToLogin()"
+                class="text-purple-500 hover:text-purple-400 cursor-pointer font-semibold">
+          Sign in
+        </button>
+      </p>
+
+    </form>
+  </div>
+</div>

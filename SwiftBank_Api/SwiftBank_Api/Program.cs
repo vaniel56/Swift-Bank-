@@ -17,6 +17,7 @@ builder.Services.AddDbContext<SwiftBankDbContext>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+
 var app = builder.Build();
 
 app.UseSwagger();

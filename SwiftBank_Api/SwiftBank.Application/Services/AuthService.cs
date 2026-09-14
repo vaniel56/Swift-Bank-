@@ -1,11 +1,36 @@
+using Microsoft.EntityFrameworkCore;
+using SwiftBank.Application.DTOs;
 using SwiftBank.Application.Interfaces;
+using SwiftBank.Domain.Entities;
+using SwiftBank.Infrastructure.Data;
 
 namespace SwiftBank.Application.Services;
 
-public class AuthService : IAuthService
+public class AuthService(SwiftBankDbContext context) : IAuthService
 {
-  public string Login()
+  public async Task<bool> RegisterAsync(RegisterRequest request)
   {
-    return "Login successful";
+    // Reject registration if a user with the same email already exists.
+    var existingUser = await context.Users
+        .FirstOrDefaultAsync(u => u.Email == request.Email);
+
+    if (existingUser != null)
+    {
+      return false;
+    }
+
+    // Create the user with a hashed password.
+    var user = new User
+    {
+      FirstName = request.FirstName,
+      LastName = request.LastName,
+      Email = request.Email,
+      PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
+    };
+
+    context.Users.Add(user);
+    await context.SaveChangesAsync();
+
+    return true;
   }
 }

@@ -201,3 +201,4 @@ C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net10.0\SwiftBank.Infrastructure.dll
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net10.0\SwiftBank.Infrastructure.pdb
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net10.0\SwiftBank.Domain.pdb
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net10.0\BCrypt-Net-Next.dll

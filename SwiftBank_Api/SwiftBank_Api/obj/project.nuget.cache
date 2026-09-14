@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "9HOYLDwBB0Y=",
+  "dgSpecHash": "pJ2k7cOdvr4=",
   "success": true,
   "projectFilePath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank_Api\\SwiftBank_Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\azure.core\\1.50.0\\azure.core.1.50.0.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\azure.identity\\1.17.1\\azure.identity.1.17.1.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.11\\microsoft.aspnetcore.openapi.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",

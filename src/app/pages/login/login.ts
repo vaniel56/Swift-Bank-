@@ -22,7 +22,9 @@ export class Login {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
-
+goToRegister() {
+    this.router.navigateByUrl("register");
+  }
   onLoginUser() {
     if (this.empForm.valid) {
       const { email, password } = this.empForm.value;
