@@ -14,32 +14,24 @@ namespace SwiftBank_Api.Controllers
     {
       _authService = authService;
     }
-  //  endpoint
+    // POST api/auth/register - registers a new user.
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-      // 1. Basic validation
+      if (!ModelState.IsValid)
+        return BadRequest(new { message = "Please check the form and try again.", errors = ModelState });
+
       if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
-        return BadRequest("Email and password are required.");
+        return BadRequest(new { message = "Email and password are required." });
 
       if (request.Password != request.ConfirmPassword)
-        return BadRequest("Passwords do not match.");
+        return BadRequest(new { message = "Passwords do not match." });
 
-      // 2. Register the user through the application service
       var registered = await _authService.RegisterAsync(request);
-
       if (!registered)
-      {
-        return BadRequest(new
-        {
-          message = "A user with this email already exists."
-        });
-      }
+        return Conflict(new { message = "A user with this email already exists." });
 
-      return Ok(new
-      {
-        message = "Registration successful."
-      });
+      return Ok(new { message = "Registration successful." });
     }
   }
 }

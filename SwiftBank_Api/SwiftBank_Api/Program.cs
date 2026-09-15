@@ -17,13 +17,22 @@ builder.Services.AddDbContext<SwiftBankDbContext>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Allow the Angular dev server (http://localhost:4200) to call this API during development.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DevCors", policy =>
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
 
 var app = builder.Build();
 
+app.UseCors("DevCors");
+app.UseHttpsRedirection();
+
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
