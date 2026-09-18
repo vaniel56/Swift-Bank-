@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SwiftBank.Application.DTOs;
+using SwiftBank.Domain.Entities;
+using SwiftBank.Application.Services;
 using SwiftBank.Application.Interfaces;
 
 namespace SwiftBank_Api.Controllers

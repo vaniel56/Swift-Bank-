@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RegistrationSnackbarComponent } from '../registration-snackbar.component';
 
 @Component({
   selector: 'app-register',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './register.html',
-  styleUrl: './register.css',
+  styleUrls: ['./register.css'],
 })
 export class Register {
   firstName = '';
@@ -22,29 +25,60 @@ export class Register {
   loading = false;
 
   errorMessage = '';
+  successMessage = '';
+
   fieldErrors: { [key: string]: string } = {};
-  
-  registrationPage: string = 'form'; // 'form' or 'success'
-  successData: any = null;
-  countdownSeconds: number = 3;
+
+  private redirectTimer?: ReturnType<typeof setInterval>;
+
+  countdownSeconds = 3;
+
+  private readonly registerUrl = 'http://localhost:5271/api/Auth/register';
 
   constructor(
-    private authService: AuthService,
     private router: Router,
+    private http: HttpClient,
+    private _snackBar: MatSnackBar
   ) {}
 
+  /**
+   * Opens a styled snackbar (green for success, red for error).
+   */
+  openSnackBar(message: string, type: 'success' | 'error' = 'success'): void {
+    this._snackBar.openFromComponent(RegistrationSnackbarComponent, {
+      duration: this.durationInSeconds() * 1000,
+      data: { message, type },
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['custom-snackbar'],
+    });
+  }
+
+  durationInSeconds(): number {
+    return 3;
+  }
+
+  /**
+   * Validates the form client-side.
+   */
   private validate(): boolean {
     this.fieldErrors = {};
     this.errorMessage = '';
+    this.successMessage = '';
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!this.firstName.trim()) this.fieldErrors['firstName'] = 'First name is required.';
-    if (!this.lastName.trim()) this.fieldErrors['lastName'] = 'Last name is required.';
+    if (!this.firstName.trim()) {
+      this.fieldErrors['firstName'] = 'First name is required.';
+    }
+
+    if (!this.lastName.trim()) {
+      this.fieldErrors['lastName'] = 'Last name is required.';
+    }
 
     if (!this.email.trim()) {
       this.fieldErrors['email'] = 'Email is required.';
-    } else if (!emailRegex.test(this.email)) {
+    } else if (!emailRegex.test(this.email.trim())) {
       this.fieldErrors['email'] = 'Enter a valid email address.';
     }
 
@@ -63,64 +97,133 @@ export class Register {
     return Object.keys(this.fieldErrors).length === 0;
   }
 
-  onSubmit() {
-    if (!this.validate()) {
-      this.loading = false;
+  /**
+   * Handles registration submit.
+   */
+  onSubmit(): void {
+    if (!this.validate() || this.loading) {
       return;
     }
 
     this.loading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
 
-    this.authService
-      .register({
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        password: this.password,
-        confirmPassword: this.confirmPassword,
-      })
-      .subscribe({
-        next: () => {
-          this.loading = false;
-          this.successData = {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-          };
-          this.registrationPage = 'success';
-          this.countdownSeconds = 3;
-          
-          // Start countdown and auto-redirect to login after 3 seconds
-          const countdownInterval = setInterval(() => {
-            this.countdownSeconds--;
-            if (this.countdownSeconds <= 0) {
-              clearInterval(countdownInterval);
-              this.goToLogin();
-            }
-          }, 1000);
-        },
-        error: (err) => {
-          this.loading = false;
-          const payload = err?.error;
+    const body = {
+      firstName: this.firstName.trim(),
+      lastName: this.lastName.trim(),
+      email: this.email.trim(),
+      password: this.password,
+      confirmPassword: this.confirmPassword,
+    };
+
+    this.http.post<{ message: string }>(this.registerUrl, body).subscribe({
+      /**
+       * 200 OK — success.
+       */
+      next: (response) => {
+        this.loading = false;
+        this.errorMessage = '';
+        this.fieldErrors = {};
+
+        const successMsg =
+          response?.message ||
+          'Registration successful. You can now sign in.';
+
+        // Show green success snackbar
+        this.openSnackBar(successMsg, 'success');
+
+        // Clear form
+        this.firstName = '';
+        this.lastName = '';
+        this.email = '';
+        this.password = '';
+        this.confirmPassword = '';
+
+        // Redirect after 3 seconds
+        this.startRedirectCountdown();
+      },
+
+      /**
+       * Error handler — 400 / 409 / others.
+       */
+      error: (err) => {
+        this.loading = false;
+        this.successMessage = '';
+        this.fieldErrors = {};
+
+        const status = err?.status;
+        const payload = err?.error;
+
+        // 409 Conflict — user already exists
+        if (status === 409) {
+          const message =
+            payload?.message || 'A user with this email already exists.';
+
+          this.errorMessage = message;
+          this.fieldErrors = { ...this.fieldErrors, email: message };
+
+          this.openSnackBar(message, 'error');
+          return;
+        }
+
+        // 400 Bad Request — backend validation failed
+        if (status === 400) {
+          const message =
+            payload?.message ||
+            'Registration unsuccessful. Please check your details and try again.';
 
           if (payload?.errors && typeof payload.errors === 'object') {
             for (const key of Object.keys(payload.errors)) {
               const camelKey = key.charAt(0).toLowerCase() + key.slice(1);
-              this.fieldErrors[camelKey] = payload.errors[key][0];
+              const errorValue = payload.errors[key];
+
+              if (Array.isArray(errorValue) && errorValue.length > 0) {
+                this.fieldErrors[camelKey] = errorValue[0];
+              } else if (typeof errorValue === 'string') {
+                this.fieldErrors[camelKey] = errorValue;
+              }
             }
-            this.errorMessage = 'Please fix the errors below.';
-          } else if (typeof payload === 'string') {
-            this.errorMessage = payload;
-          } else if (payload?.message) {
-            this.errorMessage = payload.message;
-          } else {
-            this.errorMessage = 'Registration failed. Please try again.';
           }
-        },
-      });
+
+          this.errorMessage = message;
+          this.openSnackBar(message, 'error');
+          return;
+        }
+
+        // Anything else (network, CORS, 500, ...)
+        const message =
+          payload?.message || 'Registration unsuccessful. Please try again.';
+
+        this.errorMessage = message;
+        this.openSnackBar(message, 'error');
+      },
+    });
   }
 
-  goToLogin() {
+  /**
+   * Starts a countdown before redirecting to /login.
+   */
+  private startRedirectCountdown(seconds = 3): void {
+    if (this.redirectTimer) {
+      clearInterval(this.redirectTimer);
+    }
+
+    this.countdownSeconds = seconds;
+
+    this.redirectTimer = setInterval(() => {
+      this.countdownSeconds--;
+
+      if (this.countdownSeconds <= 0) {
+        if (this.redirectTimer) {
+          clearInterval(this.redirectTimer);
+        }
+        this.router.navigate(['/login']);
+      }
+    }, 1000);
+  }
+
+  goToLogin(): void {
     this.router.navigate(['/login']);
   }
 }

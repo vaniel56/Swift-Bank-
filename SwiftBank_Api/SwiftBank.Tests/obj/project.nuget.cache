@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "V8PmXB4hK9s=",
+  "dgSpecHash": "oCzxjReFPjI=",
   "success": true,
   "projectFilePath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj",
   "expectedPackageFiles": [
@@ -45,8 +45,8 @@
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.diagnostics\\10.0.11\\microsoft.extensions.diagnostics.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.11\\microsoft.extensions.diagnostics.abstractions.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.diagnostics.exceptionsummarization\\10.8.0\\microsoft.extensions.diagnostics.exceptionsummarization.10.8.0.nupkg.sha512",
-    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.diagnostics.healthchecks\\10.0.11\\microsoft.extensions.diagnostics.healthchecks.10.0.11.nupkg.sha512",
-    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.diagnostics.healthchecks.abstractions\\10.0.11\\microsoft.extensions.diagnostics.healthchecks.abstractions.10.0.11.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.diagnostics.healthchecks\\9.0.19\\microsoft.extensions.diagnostics.healthchecks.9.0.19.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.diagnostics.healthchecks.abstractions\\9.0.19\\microsoft.extensions.diagnostics.healthchecks.abstractions.9.0.19.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\10.0.11\\microsoft.extensions.fileproviders.abstractions.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\10.0.11\\microsoft.extensions.fileproviders.physical.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\10.0.11\\microsoft.extensions.filesystemglobbing.10.0.11.nupkg.sha512",
@@ -62,7 +62,7 @@
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.logging.debug\\10.0.11\\microsoft.extensions.logging.debug.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.logging.eventlog\\10.0.11\\microsoft.extensions.logging.eventlog.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.logging.eventsource\\10.0.11\\microsoft.extensions.logging.eventsource.10.0.11.nupkg.sha512",
-    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.objectpool\\10.0.10\\microsoft.extensions.objectpool.10.0.10.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.objectpool\\9.0.18\\microsoft.extensions.objectpool.9.0.18.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.options\\10.0.11\\microsoft.extensions.options.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\10.0.11\\microsoft.extensions.options.configurationextensions.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.11\\microsoft.extensions.primitives.10.0.11.nupkg.sha512",
@@ -91,8 +91,17 @@
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\polytype\\1.3.1\\polytype.1.3.1.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\semver\\3.0.0\\semver.3.0.0.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\streamjsonrpc\\2.25.29\\streamjsonrpc.2.25.29.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.diagnostics.diagnosticsource\\10.0.11\\system.diagnostics.diagnosticsource.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.11\\system.diagnostics.eventlog.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.io.hashing\\10.0.8\\system.io.hashing.10.0.8.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.io.pipelines\\10.0.11\\system.io.pipelines.10.0.11.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.memory\\4.6.3\\system.memory.4.6.3.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.net.serversentevents\\10.0.7\\system.net.serversentevents.10.0.7.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.reflection.metadata\\8.0.0\\system.reflection.metadata.8.0.0.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.1.2\\system.runtime.compilerservices.unsafe.6.1.2.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.text.encodings.web\\10.0.11\\system.text.encodings.web.10.0.11.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.text.json\\10.0.11\\system.text.json.10.0.11.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\system.threading.ratelimiting\\8.0.0\\system.threading.ratelimiting.8.0.0.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\xunit\\2.9.3\\xunit.2.9.3.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
@@ -102,7 +111,10 @@
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\xunit.extensibility.core\\2.9.3\\xunit.extensibility.core.2.9.3.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\xunit.extensibility.execution\\2.9.3\\xunit.extensibility.execution.2.9.3.nupkg.sha512",
     "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\xunit.runner.visualstudio\\3.1.4\\xunit.runner.visualstudio.3.1.4.nupkg.sha512",
-    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\yamldotnet\\16.3.0\\yamldotnet.16.3.0.nupkg.sha512"
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\yamldotnet\\16.3.0\\yamldotnet.16.3.0.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.20\\microsoft.netcore.app.ref.9.0.20.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.20\\microsoft.windowsdesktop.app.ref.9.0.20.nupkg.sha512",
+    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.20\\microsoft.aspnetcore.app.ref.9.0.20.nupkg.sha512"
   ],
   "logs": []
 }

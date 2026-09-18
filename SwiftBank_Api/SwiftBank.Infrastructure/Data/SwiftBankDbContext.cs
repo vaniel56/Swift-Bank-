@@ -5,5 +5,5 @@ namespace SwiftBank.Infrastructure.Data;
 
 public class SwiftBankDbContext(DbContextOptions<SwiftBankDbContext> options) : DbContext(options)
 {
-    public DbSet<User> Users { get; set; }
+    public required DbSet<User> Users { get; set; }
 }

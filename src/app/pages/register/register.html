@@ -1,13 +1,13 @@
 <div class="bg-black w-full min-h-screen flex items-center justify-center px-3 py-6">
 
-  @if (registrationPage == 'form') {
-    <div class="w-full max-w-md bg-[#121212] rounded-[13px] px-6 py-8
-                md:w-75 md:h-130 md:px-6 md:pt-8 md:pb-6
-                sm:w-100 sm:px-5 sm:rounded-[13px]">
-
+  <!-- ===================== FORM ===================== -->
+  <div
+    class="w-full max-w-md bg-[#121212] rounded-[13px] px-6 py-8 md:w-75 md:h-130 md:px-6 md:pt-8 md:pb-6 sm:w-100 sm:px-5 sm:rounded-[13px]"
+  >
     <!-- Logo -->
-    <span class="inline-block rounded-2xl px-5 py-3 bg-[#A6E146] font-bold text-[25px]
-                 md:px-3.5 md:py-2 md:text-[15px] md:rounded-[10px]">
+    <span
+      class="inline-block rounded-2xl px-5 py-3 bg-[#A6E146] font-bold text-[25px] md:px-3.5 md:py-2 md:text-[15px] md:rounded-[10px]"
+    >
       S
     </span>
 
@@ -19,30 +19,37 @@
       Join SwiftBank in less than a minute
     </p>
 
-    <!-- Global error banner -->
+    <!-- Error banner (kept for persistent errors like 409) -->
     @if (errorMessage) {
-      <div class="mt-4 md:mt-3 rounded-[10px] border border-red-500/40 bg-red-500/10
-                  px-3 py-2 text-red-400 text-[13px] md:text-[11px]">
+      <div
+        class="mt-4 md:mt-3 rounded-[10px] border border-red-500/40 bg-red-500/10 px-3 py-2 text-red-400 text-[13px] md:text-[11px]"
+        role="alert"
+        aria-live="assertive"
+      >
         {{ errorMessage }}
       </div>
     }
 
     <!-- Form -->
-    <form (ngSubmit)="onSubmit()" #regForm="ngForm"
-          class="w-full mt-6 md:mt-4 flex flex-col gap-3 md:gap-2">
-
+    <form
+      (ngSubmit)="onSubmit()"
+      #regForm="ngForm"
+      class="w-full mt-6 md:mt-4 flex flex-col gap-3 md:gap-2"
+    >
       <!-- First + Last name -->
       <div class="flex gap-3 md:gap-2">
         <div class="flex-1">
           <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">First name</p>
           <input
-            id="firstName" type="text"
-            [(ngModel)]="firstName" name="firstName"
-            placeholder="John" required
+            id="firstName"
+            type="text"
+            [(ngModel)]="firstName"
+            name="firstName"
+            placeholder="John"
+            required
             [class.border-red-500]="fieldErrors['firstName']"
-            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3
-                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
-                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 bg-[#1E2128] text-white text-[15px] md:text-[12px] border border-gray-700 focus:outline-none focus:border-[#A6E146] transition"
+          />
           @if (fieldErrors['firstName']) {
             <p class="text-red-400 text-[12px] md:text-[10px] mt-1">
               {{ fieldErrors['firstName'] }}
@@ -53,13 +60,15 @@
         <div class="flex-1">
           <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">Last name</p>
           <input
-            id="lastName" type="text"
-            [(ngModel)]="lastName" name="lastName"
-            placeholder="Doe" required
+            id="lastName"
+            type="text"
+            [(ngModel)]="lastName"
+            name="lastName"
+            placeholder="Doe"
+            required
             [class.border-red-500]="fieldErrors['lastName']"
-            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3
-                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
-                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 bg-[#1E2128] text-white text-[15px] md:text-[12px] border border-gray-700 focus:outline-none focus:border-[#A6E146] transition"
+          />
           @if (fieldErrors['lastName']) {
             <p class="text-red-400 text-[12px] md:text-[10px] mt-1">
               {{ fieldErrors['lastName'] }}
@@ -72,18 +81,17 @@
       <div>
         <p class="text-gray-400 text-[15px] md:text-[10px] mb-1">Email</p>
         <input
-          id="email" type="email"
-          [(ngModel)]="email" name="email"
-          placeholder="name@gmail.com" required
+          id="email"
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="name@gmail.com"
+          required
           [class.border-red-500]="fieldErrors['email']"
-          class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3
-                 bg-[#1E2128] text-white text-[15px] md:text-[12px]
-                 border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
-        @if (fieldErrors['email']) {
-          <p class="text-red-400 text-[12px] md:text-[10px] mt-1">
-            {{ fieldErrors['email'] }}
-          </p>
-        }
+          class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 bg-[#1E2128] text-white text-[15px] md:text-[12px] border border-gray-700 focus:outline-none focus:border-[#A6E146] transition"
+        />
+       
+        
       </div>
 
       <!-- Password -->
@@ -93,14 +101,18 @@
           <input
             id="password"
             [type]="showPassword ? 'text' : 'password'"
-            [(ngModel)]="password" name="password"
-            placeholder="••••••••" required
+            [(ngModel)]="password"
+            name="password"
+            placeholder="••••••••"
+            required
             [class.border-red-500]="fieldErrors['password']"
-            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 pr-10
-                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
-                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
-          <button type="button" (click)="showPassword = !showPassword"
-                  class="absolute right-3 text-gray-400 hover:text-white md:text-[11px]">
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 pr-10 bg-[#1E2128] text-white text-[15px] md:text-[12px] border border-gray-700 focus:outline-none focus:border-[#A6E146] transition"
+          />
+          <button
+            type="button"
+            (click)="showPassword = !showPassword"
+            class="absolute right-3 text-gray-400 hover:text-white md:text-[11px]"
+          >
             <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
           </button>
         </div>
@@ -118,14 +130,18 @@
           <input
             id="confirmPassword"
             [type]="showConfirmPassword ? 'text' : 'password'"
-            [(ngModel)]="confirmPassword" name="confirmPassword"
-            placeholder="••••••••" required
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            placeholder="••••••••"
+            required
             [class.border-red-500]="fieldErrors['confirmPassword']"
-            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 pr-10
-                   bg-[#1E2128] text-white text-[15px] md:text-[12px]
-                   border border-gray-700 focus:outline-none focus:border-[#A6E146] transition" />
-          <button type="button" (click)="showConfirmPassword = !showConfirmPassword"
-                  class="absolute right-3 text-gray-400 hover:text-white md:text-[11px]">
+            class="w-full h-14 md:h-9 rounded-[15px] md:rounded-[9px] pl-3 pr-10 bg-[#1E2128] text-white text-[15px] md:text-[12px] border border-gray-700 focus:outline-none focus:border-[#A6E146] transition"
+          />
+          <button
+            type="button"
+            (click)="showConfirmPassword = !showConfirmPassword"
+            class="absolute right-3 text-gray-400 hover:text-white md:text-[11px]"
+          >
             <i [class]="showConfirmPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
           </button>
         </div>
@@ -141,60 +157,22 @@
         type="submit"
         [disabled]="loading || regForm.invalid"
         [ngClass]="{ 'opacity-50': regForm.invalid }"
-        class="w-full bg-[#A6E146] text-black py-2 rounded-[15px] h-14
-               md:rounded-[9px] md:h-9 md:text-[12px]
-               text-[18px] font-bold cursor-pointer mt-3 md:mt-2
-               hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition">
+        class="w-full bg-[#A6E146] text-black py-2 rounded-[15px] h-14 md:rounded-[9px] md:h-9 md:text-[12px] text-[18px] font-bold cursor-pointer mt-3 md:mt-2 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition"
+      >
         {{ loading ? 'Creating account...' : 'Create account' }}
       </button>
 
       <!-- Sign in link -->
       <p class="text-gray-400 text-[15px] md:text-[10px] mt-2 flex items-center justify-between">
         Already have an account?
-        <button type="button" (click)="goToLogin()"
-                class="text-purple-500 hover:text-purple-400 cursor-pointer font-semibold">
+        <button
+          type="button"
+          (click)="goToLogin()"
+          class="text-purple-500 hover:text-purple-400 cursor-pointer font-semibold"
+        >
           Sign in
         </button>
       </p>
-
     </form>
   </div>
-  }
-
-  @if (registrationPage == 'success') {
-    <section class="success-page flex items-center justify-center md:h-screen">
-      <div
-        class="md:bg-[#111419]  md:w-100 w-full h-70 rounded-lg flex flex-col items-center justify-center"
-      >
-        <div class="w-20 h-20 rounded-full bg-[#A6E146] flex items-center justify-center shadow-lg">
-          <!-- Checkmark SVG -->
-          <svg
-            class="w-8 h-8"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#1e293b"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="4,12 10,18 20,6" />
-          </svg>
-        </div>
-        <div class="font-bold text-2xl mt-4">Account Created Successfully</div>
-        <p class="text-[15px] text-[#9B9FA5] mt-2">
-          Welcome {{ successData?.firstName }} {{ successData?.lastName }}
-        </p>
-        <p class="text-[12px] text-[#7D8086] mt-3">
-          Redirecting to login in {{ countdownSeconds }} seconds...
-        </p>
-        <button
-          class="w-90 md:h-10 h-15 bg-[#191D24] cursor-pointer rounded-2xl md:rounded-lg text-white text-[17px] md:text-[12px] font-bold mt-3 hover:opacity-90 transition"
-          (click)="goToLogin()"
-        >
-          Proceed to Login
-        </button>
-      </div>
-    </section>
-  }
-
 </div>

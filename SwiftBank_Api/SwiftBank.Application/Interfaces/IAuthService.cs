@@ -1,8 +1,10 @@
 using SwiftBank.Application.DTOs;
 
-namespace SwiftBank.Application.Interfaces;
-
-public interface IAuthService
+namespace SwiftBank.Application.Interfaces
 {
-  Task<bool> RegisterAsync(RegisterRequest request);
+  public interface IAuthService
+  {
+    Task<bool> RegisterAsync(RegisterRequest request);
+    Task<LoginResponse?> LoginAsync(DTOS.LoginRequest request);   // ← new
+  }
 }
