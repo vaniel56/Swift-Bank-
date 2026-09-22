@@ -7,6 +7,7 @@ import { Paybills } from './pages/paybills/paybills';
 import { Savings } from './pages/savings/savings';
 import { History } from './pages/history/history';
 import { Register } from './pages/register/register';
+import { authGuard } from './auth-guard'; // 👈 import the guard
 
 export const routes: Routes = [
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
   {
     path: 'layout',
     component: Layout,
+    canActivate: [authGuard], // 👈 protects all children
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },

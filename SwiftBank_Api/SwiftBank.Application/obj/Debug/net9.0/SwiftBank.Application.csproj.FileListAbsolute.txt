@@ -1,3 +1,6 @@
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank_build_out\SwiftBank.Application.deps.json
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank_build_out\SwiftBank.Application.dll
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank_build_out\SwiftBank.Application.pdb
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net9.0\SwiftBank.Application.deps.json
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net9.0\SwiftBank.Application.dll
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net9.0\SwiftBank.Application.pdb

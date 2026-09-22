@@ -7,6 +7,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormGroup, FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ import { CommonModule } from '@angular/common';
 export class Login {
   showPassword: boolean = false;
   router = inject(Router);
+  private authService = inject(AuthService);
   
   empForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -29,10 +31,12 @@ goToRegister() {
     if (this.empForm.valid) {
       const { email, password } = this.empForm.value;
       if (email === 'olamide@gmail.com' && password === 'password123') {
+        // Persist a session token so the auth guard lets the user in (demo only)
+        this.authService.setToken('demo-token');
         this.router.navigateByUrl("layout");
       } else {
         alert("Invalid Credentials");
       }
-    } 
+    }
   }
 }

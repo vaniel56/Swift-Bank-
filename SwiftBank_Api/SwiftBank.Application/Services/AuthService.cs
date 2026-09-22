@@ -34,17 +34,26 @@ public class AuthService(SwiftBankDbContext context) : IAuthService
     return true;
   }
 
-  public async Task<LoginResponse?> LoginAsync(DTOS.LoginRequest request)
+  public async Task<bool> LoginAsync(LoginRequest request)
   {
     var user = await context.Users
         .FirstOrDefaultAsync(u => u.Email == request.Email);
 
-    if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+    if (user == null)
     {
-      return null;
+      return false;
     }
 
-    // Generate and return authentication token
-    return new LoginResponse { Token = "token" }; // Replace with actual token generation logic
+    var passwordMatches = BCrypt.Net.BCrypt.Verify(
+        request.Password,
+        user.PasswordHash
+    );
+
+    if (!passwordMatches)
+    {
+      return false;
+    }
+
+    return true;
   }
 }

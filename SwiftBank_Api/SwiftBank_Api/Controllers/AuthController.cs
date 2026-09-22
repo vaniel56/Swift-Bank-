@@ -35,5 +35,26 @@ namespace SwiftBank_Api.Controllers
 
       return Ok(new { message = "Registration successful." });
     }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginRequest request)
+    {
+      var result = await _authService.LoginAsync(request);
+
+      if (!result)
+      {
+        return Unauthorized(new
+        {
+          message = "Invalid email or password."
+        });
+      }
+
+      return Ok(new
+      {
+        message = "Login successful."
+      });
+    }
   }
+
+  
 }
