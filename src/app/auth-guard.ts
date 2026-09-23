@@ -1,17 +1,24 @@
 import { inject } from '@angular/core';
-import { Router, CanActivateFn } from '@angular/router';
-import { AuthService } from './auth.service'; // Your service
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = (_route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Check if the user is logged in
+  // Valid, non-expired token → allow access.
   if (authService.isAuthenticated()) {
-    return true; // User is authenticated, allow access
+    return true;
   }
 
-  // Not authenticated: redirect to the login page
-  // Using router.parseUrl or router.createUrlTree is the preferred way
-  return router.parseUrl('/login');
+  // Not authenticated: remember where the user was going and send them to login.
+  return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
+};
+
+/** Redirects already-logged-in users away from the login/register pages. */
+export const guestGuard: CanActivateFn = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  return authService.isAuthenticated() ? router.createUrlTree(['/layout/home']) : true;
 };

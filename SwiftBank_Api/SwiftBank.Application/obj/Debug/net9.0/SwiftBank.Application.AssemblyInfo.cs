@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SwiftBank.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd208ca014d2a2d2273de79893aa2844d65fb086")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af88f6a65747c0ccc6abc477f2523eae68e8e250")]
 [assembly: System.Reflection.AssemblyProductAttribute("SwiftBank.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SwiftBank.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

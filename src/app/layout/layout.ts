@@ -2,12 +2,15 @@
   Layout component: application shell with navigation menu and router outlet.
   - Tracks `activeService` and updates it from Router NavigationEnd events so
     the sidebar highlight matches the current route.
+  - Shows the logged-in user's name/initials and provides logout.
 */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink, RouterOutlet, NavigationEnd } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { AuthService, UserProfile } from '../auth.service';
+import { formatFullName, initials } from '../formatUser';
 
 @Component({
   selector: 'app-layout',
@@ -17,9 +20,15 @@ import { filter } from 'rxjs/operators';
 })
 export class Layout implements OnInit, OnDestroy {
   activeService = 'home';
+  displayName = 'Swift User';
+  userInitials = 'SU';
   private sub: Subscription | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {
+    const profile: UserProfile | null = this.authService.getUserProfile();
+    this.displayName = formatFullName(profile?.firstName, profile?.lastName) || 'Swift User';
+    this.userInitials = initials(this.displayName);
+  }
 
   ngOnInit() {
     this.setActiveFromUrl(this.router.url);
@@ -42,6 +51,10 @@ export class Layout implements OnInit, OnDestroy {
     this.activeService = parts[parts.length - 1];
   }
 
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 
   ngOnDestroy() {
     if (this.sub) this.sub.unsubscribe();

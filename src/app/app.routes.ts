@@ -7,7 +7,7 @@ import { Paybills } from './pages/paybills/paybills';
 import { Savings } from './pages/savings/savings';
 import { History } from './pages/history/history';
 import { Register } from './pages/register/register';
-import { authGuard } from './auth-guard'; // 👈 import the guard
+import { authGuard, guestGuard } from './auth-guard';
 
 export const routes: Routes = [
   {
@@ -15,12 +15,14 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
-  { path: 'login', component: Login },
-  { path: 'register', component: Register },
+  // Convenience alias so '/home' works like '/layout/home'
+  { path: 'home', redirectTo: 'layout/home', pathMatch: 'full' },
+  { path: 'login', component: Login, canActivate: [guestGuard] },
+  { path: 'register', component: Register, canActivate: [guestGuard] },
   {
     path: 'layout',
     component: Layout,
-    canActivate: [authGuard], // 👈 protects all children
+    canActivate: [authGuard], // protects all children
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
@@ -30,4 +32,6 @@ export const routes: Routes = [
       { path: 'history', component: History },
     ],
   },
+  // Unknown routes → back to login
+  { path: '**', redirectTo: 'login' },
 ];

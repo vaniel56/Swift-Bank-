@@ -2,9 +2,9 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RegistrationSnackbarComponent } from '../registration-snackbar.component';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -33,11 +33,9 @@ export class Register {
 
   countdownSeconds = 3;
 
-  private readonly registerUrl = 'http://localhost:5271/api/Auth/register';
-
   constructor(
     private router: Router,
-    private http: HttpClient,
+    private authService: AuthService,
     private _snackBar: MatSnackBar
   ) {}
 
@@ -117,7 +115,7 @@ export class Register {
       confirmPassword: this.confirmPassword,
     };
 
-    this.http.post<{ message: string }>(this.registerUrl, body).subscribe({
+    this.authService.register(body).subscribe({
       /**
        * 200 OK — success.
        */

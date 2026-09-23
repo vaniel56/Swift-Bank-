@@ -34,26 +34,23 @@ public class AuthService(SwiftBankDbContext context) : IAuthService
     return true;
   }
 
-  public async Task<bool> LoginAsync(LoginRequest request)
+  public async Task<User?> LoginAsync(string email, string password)
   {
     var user = await context.Users
-        .FirstOrDefaultAsync(u => u.Email == request.Email);
+        .FirstOrDefaultAsync(u => u.Email == email);
 
     if (user == null)
     {
-      return false;
+      return null;
     }
 
-    var passwordMatches = BCrypt.Net.BCrypt.Verify(
-        request.Password,
-        user.PasswordHash
-    );
+    var passwordMatches = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
 
     if (!passwordMatches)
     {
-      return false;
+      return null;
     }
 
-    return true;
+    return user;
   }
 }

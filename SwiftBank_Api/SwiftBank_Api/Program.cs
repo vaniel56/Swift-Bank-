@@ -1,11 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SwiftBank.Application.Interfaces;
 using SwiftBank.Application.Services;
 using SwiftBank.Infrastructure.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.OpenApi.Models;   // 👈 ADD THIS
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-// 👇 REPLACE your plain AddSwaggerGen() with this version
+// Swagger with JWT "Authorize" button
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -42,13 +42,16 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+// Database
 builder.Services.AddDbContext<SwiftBankDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
+// Application services
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// CORS for Angular dev server
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DevCors", policy =>
@@ -57,6 +60,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod());
 });
 
+// ✅ JWT authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -69,7 +73,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+            ClockSkew = TimeSpan.Zero // no 5-min grace period on token expiry
         };
     });
 
@@ -77,18 +82,25 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+// Apply pending migrations on startup
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<SwiftBankDbContext>();
     db.Database.Migrate();
 }
 
-app.UseCors("DevCors");
+// Swagger (only in Development is a common pattern — leave as-is if you want it everywhere)
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseHttpsRedirection();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseCors("DevCors");
 
+// ⚠️ ORDER MATTERS: Authentication BEFORE Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 

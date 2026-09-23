@@ -163,3 +163,12 @@ C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\obj\Debug\net9.0\SwiftBank_Api.dll
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\obj\Debug\net9.0\refint\SwiftBank_Api.dll
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\obj\Debug\net9.0\SwiftBank_Api.pdb
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net9.0\appsettings.json
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net9.0\SwiftBank_Api.staticwebassets.endpoints.json
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net9.0\SwiftBank_Api.deps.json
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net9.0\SwiftBank_Api.runtimeconfig.json
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\bin\Debug\net9.0\SwiftBank_Api.pdb
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\obj\Debug\net9.0\SwiftBan.FDDD9F24.Up2Date
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\obj\Debug\net9.0\SwiftBank_Api.genruntimeconfig.cache
+C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank_Api\obj\Debug\net9.0\ref\SwiftBank_Api.dll
