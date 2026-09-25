@@ -89,3 +89,25 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[LastName], [u].[PasswordHash]
       FROM [Users] AS [u]
       WHERE [u].[Email] = @__email_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (97ms) [Parameters=[@__request_Email_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[LastName], [u].[PasswordHash]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = @__request_Email_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (34ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SET IMPLICIT_TRANSACTIONS OFF;
+      SET NOCOUNT ON;
+      INSERT INTO [Users] ([CreatedAt], [Email], [FirstName], [LastName], [PasswordHash])
+      OUTPUT INSERTED.[Id]
+      VALUES (@p0, @p1, @p2, @p3, @p4);
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (13ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[LastName], [u].[PasswordHash]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = @__email_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (18ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Email], [u].[FirstName], [u].[LastName], [u].[PasswordHash]
+      FROM [Users] AS [u]
+      WHERE [u].[Email] = @__email_0

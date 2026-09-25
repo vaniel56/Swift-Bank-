@@ -51,6 +51,10 @@ builder.Services.AddDbContext<SwiftBankDbContext>(options =>
 // Application services
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+builder.Services.AddScoped<IDashboardService, DashboardService>();
+
 // CORS for Angular dev server
 builder.Services.AddCors(options =>
 {
