@@ -65,6 +65,10 @@ builder.Services.AddCors(options =>
 });
 
 // ✅ JWT authentication
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException(
+        "Jwt:Key is not configured. Set it in appsettings.json under \"Jwt\": { \"Key\": ... }.");
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -77,11 +81,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
-            ClockSkew = TimeSpan.Zero // no 5-min grace period on token expiry
+                Encoding.UTF8.GetBytes(jwtKey))
+        };
+
+        // 🔍 Diagnostic logging — prints the real rejection reason if a token ever fails
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = ctx =>
+            {
+                Console.WriteLine("JWT FAILED: " + ctx.Exception.GetType().Name);
+                Console.WriteLine("MSG: " + ctx.Exception.Message);
+                if (ctx.Exception.InnerException != null)
+                    Console.WriteLine("INNER: " + ctx.Exception.InnerException.Message);
+                return Task.CompletedTask;
+            }
         };
     });
-
 builder.Services.AddAuthorization();
 
 var app = builder.Build();

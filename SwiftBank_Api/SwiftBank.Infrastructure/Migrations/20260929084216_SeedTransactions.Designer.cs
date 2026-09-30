@@ -12,8 +12,8 @@ using SwiftBank.Infrastructure.Data;
 namespace SwiftBank.Infrastructure.Migrations
 {
     [DbContext(typeof(SwiftBankDbContext))]
-    [Migration("20260925150351_AddAccountsAndTransactions")]
-    partial class AddAccountsAndTransactions
+    [Migration("20260929084216_SeedTransactions")]
+    partial class SeedTransactions
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,35 @@ namespace SwiftBank.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccountNumber = "0123456789",
+                            AccountType = "Savings",
+                            Balance = 210000m,
+                            Currency = "NGN",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccountNumber = "0987654321",
+                            AccountType = "Current",
+                            Balance = 272300m,
+                            Currency = "NGN",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountNumber = "1112223334",
+                            AccountType = "Savings",
+                            Balance = 500000m,
+                            Currency = "NGN",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("SwiftBank.Domain.Entities.Transaction", b =>
@@ -95,6 +124,44 @@ namespace SwiftBank.Infrastructure.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Transactions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccountId = 1,
+                            Amount = 250000m,
+                            Beneficiary = "Salary",
+                            CreatedAt = new DateTime(2026, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Type = "Credit"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccountId = 1,
+                            Amount = 25000m,
+                            Beneficiary = "Transfer to Chidi",
+                            CreatedAt = new DateTime(2026, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Type = "Debit"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountId = 2,
+                            Amount = 15000m,
+                            Beneficiary = "Electricity Bill",
+                            CreatedAt = new DateTime(2026, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Type = "Debit"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccountId = 2,
+                            Amount = 50000m,
+                            Beneficiary = "Transfer Received",
+                            CreatedAt = new DateTime(2026, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Type = "Credit"
+                        });
                 });
 
             modelBuilder.Entity("SwiftBank.Domain.Entities.User", b =>

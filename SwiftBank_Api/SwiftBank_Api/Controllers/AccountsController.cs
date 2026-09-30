@@ -17,13 +17,20 @@ public class AccountsController : ControllerBase
         _accountService = accountService;
     }
 
+    // GET /api/accounts  and  GET /api/accounts/my-accounts
+    // both return the logged-in customer's own accounts.
     [HttpGet]
+    [HttpGet("my-accounts")]
     public async Task<IActionResult> GetMyAccounts()
     {
-        int userId = GetUserId();
+        int? userId = GetUserId();
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
 
         var accounts =
-            await _accountService.GetMyAccountsAsync(userId);
+            await _accountService.GetMyAccountsAsync(userId.Value);
 
         return Ok(accounts);
     }
@@ -31,11 +38,15 @@ public class AccountsController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetAccount(int id)
     {
-        int userId = GetUserId();
+        int? userId = GetUserId();
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
 
         var account =
             await _accountService.GetMyAccountByIdAsync(
-                userId,
+                userId.Value,
                 id);
 
         if (account == null)
@@ -46,7 +57,9 @@ public class AccountsController : ControllerBase
         return Ok(account);
     }
 
-    private int GetUserId()
+    // Returns null (mapped to 401 Unauthorized by the actions above)
+    // when the user id claim is missing or not a valid integer.
+    private int? GetUserId()
     {
         var userIdClaim =
             User.FindFirstValue(ClaimTypes.NameIdentifier)
@@ -54,8 +67,7 @@ public class AccountsController : ControllerBase
 
         if (!int.TryParse(userIdClaim, out int userId))
         {
-            throw new UnauthorizedAccessException(
-                "Invalid user ID.");
+            return null;
         }
 
         return userId;

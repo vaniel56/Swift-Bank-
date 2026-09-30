@@ -4,14 +4,112 @@
     "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj": {
+    "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Application\\SwiftBank.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj",
-        "projectName": "SwiftBank.Tests",
-        "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Application\\SwiftBank.Application.csproj",
+        "projectName": "SwiftBank.Application",
+        "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Application\\SwiftBank.Application.csproj",
         "packagesPath": "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\obj\\",
+        "outputPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\OLAMIDE-D\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "framework": "net9.0",
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj": {
+                "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj"
+              },
+              "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Infrastructure\\SwiftBank.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Infrastructure\\SwiftBank.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net9.0": {
+          "framework": "net9.0",
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj",
+        "projectName": "SwiftBank.Domain",
+        "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj",
+        "packagesPath": "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,10 +149,196 @@
         "net9.0": {
           "framework": "net9.0",
           "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Infrastructure\\SwiftBank.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Infrastructure\\SwiftBank.Infrastructure.csproj",
+        "projectName": "SwiftBank.Infrastructure",
+        "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Infrastructure\\SwiftBank.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\OLAMIDE-D\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "framework": "net9.0",
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj": {
+                "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net9.0": {
+          "framework": "net9.0",
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.20, 9.0.20]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj",
+        "projectName": "SwiftBank.Tests",
+        "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\SwiftBank.Tests.csproj",
+        "packagesPath": "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\OLAMIDE-D\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "framework": "net9.0",
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Application\\SwiftBank.Application.csproj": {
+                "projectPath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Application\\SwiftBank.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net9.0": {
+          "framework": "net9.0",
+          "targetAlias": "net9.0",
           "dependencies": {
             "Aspire.Hosting.Testing": {
               "target": "Package",
               "version": "[13.5.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",

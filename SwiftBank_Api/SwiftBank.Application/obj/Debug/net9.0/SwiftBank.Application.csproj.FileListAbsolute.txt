@@ -19,3 +19,6 @@ C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net9.0\refint\SwiftBank.Application.dll
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net9.0\SwiftBank.Application.pdb
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net9.0\ref\SwiftBank.Application.dll
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Application.deps.json
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Application.dll
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Application.pdb

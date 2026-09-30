@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SwiftBank.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4b34beb7fe72e07a2169bbbf014d5ba981b1ade")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75434e5c8af3c283726bbf446c6ff8b71e99f27d")]
 [assembly: System.Reflection.AssemblyProductAttribute("SwiftBank.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SwiftBank.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

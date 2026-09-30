@@ -34,5 +34,26 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
             .WithOne(t => t.Account)
             .HasForeignKey(t => t.AccountId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasData(
+            new Account
+            {
+                Id = 1001,
+                AccountNumber = "0123456789",
+                AccountType = "Savings",
+                Balance = 210000m,
+                Currency = "NGN",
+                UserId = 1
+            },
+            new Account
+            {
+                Id = 1002,
+                AccountNumber = "0987654321",
+                AccountType = "Current",
+                Balance = 272300m,
+                Currency = "NGN",
+                UserId = 1
+            }
+        );
     }
 }

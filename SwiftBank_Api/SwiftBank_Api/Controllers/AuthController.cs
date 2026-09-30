@@ -12,7 +12,7 @@ namespace SwiftBank_Api.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  [Authorize] // 🔒 All actions require a valid JWT unless marked [AllowAnonymous]
+  [Authorize]
   public class AuthController : ControllerBase
   {
     private readonly IAuthService _authService;
@@ -63,7 +63,7 @@ namespace SwiftBank_Api.Controllers
       {
         message = "Login successful.",
         token,
-        expiresIn, // Token lifetime in seconds (15 minutes)
+        expiresIn,
         expiresAt = DateTime.UtcNow.AddSeconds(expiresIn),
         userId = user.Id,
         firstName = user.FirstName,
@@ -71,17 +71,29 @@ namespace SwiftBank_Api.Controllers
         email = user.Email
       });
     }
+
     private (string Token, int ExpiresIn) GenerateJwtToken(User user)
     {
-      const int LIFETIME_SECONDS = 15 * 60; // 15 minutes
+      // Dev only — shorten to 15 * 60 in production
+      const int LIFETIME_SECONDS = 8 * 60 * 60; // 8 hours
 
-      var claims = new[]
-      {
+      var claims = new List<Claim>
+            {
+                // Standard JWT claims
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+
+                // ASP.NET Core mapped claims — this is what [Authorize] and
+                // User.FindFirstValue(ClaimTypes.NameIdentifier) actually read
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Email, user.Email),
+
+                // Custom app claims
                 new Claim("firstName", user.FirstName),
-                new Claim("lastName", user.LastName)
+                new Claim("lastName", user.LastName),
+                new Claim("userId", user.Id.ToString())
             };
 
       var keyString = _configuration["Jwt:Key"]
@@ -96,6 +108,9 @@ namespace SwiftBank_Api.Controllers
           claims: claims,
           expires: DateTime.UtcNow.AddSeconds(LIFETIME_SECONDS),
           signingCredentials: creds);
+
+      // Temporary debug — remove once verified
+      Console.WriteLine("JWT claims emitted: " + string.Join(", ", claims.Select(c => c.Type)));
 
       return (new JwtSecurityTokenHandler().WriteToken(token), LIFETIME_SECONDS);
     }

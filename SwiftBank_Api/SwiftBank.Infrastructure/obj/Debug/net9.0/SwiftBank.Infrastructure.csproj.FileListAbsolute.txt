@@ -20,3 +20,7 @@ C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Infrastructure\obj\Debug\net9.0\SwiftBank.Infrastructure.pdb
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Infrastructure\obj\Debug\net9.0\SwiftBank.Infrastructure.genruntimeconfig.cache
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Infrastructure\obj\Debug\net9.0\ref\SwiftBank.Infrastructure.dll
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Infrastructure.deps.json
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Infrastructure.runtimeconfig.json
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Infrastructure.dll
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Infrastructure.pdb

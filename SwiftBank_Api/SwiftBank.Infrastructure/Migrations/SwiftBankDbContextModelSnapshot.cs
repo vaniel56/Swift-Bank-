@@ -57,6 +57,26 @@ namespace SwiftBank.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1001,
+                            AccountNumber = "0123456789",
+                            AccountType = "Savings",
+                            Balance = 210000m,
+                            Currency = "NGN",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 1002,
+                            AccountNumber = "0987654321",
+                            AccountType = "Current",
+                            Balance = 272300m,
+                            Currency = "NGN",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("SwiftBank.Domain.Entities.Transaction", b =>
@@ -92,6 +112,17 @@ namespace SwiftBank.Infrastructure.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Transactions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 4,
+                            AccountId = 1002,
+                            Amount = 50000m,
+                            Beneficiary = "Transfer Received",
+                            CreatedAt = new DateTime(2026, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Type = "Credit"
+                        });
                 });
 
             modelBuilder.Entity("SwiftBank.Domain.Entities.User", b =>
@@ -124,6 +155,17 @@ namespace SwiftBank.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "john@example.com",
+                            FirstName = "John",
+                            LastName = "Doe",
+                            PasswordHash = "$2a$11$aunUqpk3cBhQIaMuhDw68eSz5tgEcAMIyt.4vifZjzRDXrbDNj2gK"
+                        });
                 });
 
             modelBuilder.Entity("SwiftBank.Domain.Entities.Account", b =>

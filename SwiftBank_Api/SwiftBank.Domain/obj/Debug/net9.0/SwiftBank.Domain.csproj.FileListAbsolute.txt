@@ -13,3 +13,6 @@ C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Domain\obj\Debug\net9.0\refint\SwiftBank.Domain.dll
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Domain\obj\Debug\net9.0\SwiftBank.Domain.pdb
 C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Domain\obj\Debug\net9.0\ref\SwiftBank.Domain.dll
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Domain.deps.json
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Domain.dll
+C:\Users\OLAMIDE-D\AppData\Local\Temp\swiftbank-build-check\SwiftBank.Domain.pdb
