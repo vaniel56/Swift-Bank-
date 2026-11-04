@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qhATLPt6Oo4=",
+  "dgSpecHash": "TRSZ9Laf6+I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\OLAMIDE-D\\Desktop\\Documents\\ANGULAR\\Swift-Bank-\\SwiftBank_Api\\SwiftBank.Domain\\SwiftBank.Domain.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.20\\microsoft.netcore.app.ref.9.0.20.nupkg.sha512",
-    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.20\\microsoft.windowsdesktop.app.ref.9.0.20.nupkg.sha512",
-    "C:\\Users\\OLAMIDE-D\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.20\\microsoft.aspnetcore.app.ref.9.0.20.nupkg.sha512"
-  ],
+  "projectFilePath": "/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Domain/SwiftBank.Domain.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

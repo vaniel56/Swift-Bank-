@@ -1,0 +1,7 @@
+SELECT TOP (1000) [Id]
+      ,[AccountNumber]
+      ,[AccountType]
+      ,[Balance]
+      ,[Currency]
+      ,[UserId]
+  FROM [SwiftBankDb].[dbo].[Accounts]

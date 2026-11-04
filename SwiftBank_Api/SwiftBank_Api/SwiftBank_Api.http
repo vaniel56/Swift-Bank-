@@ -1,6 +1,32 @@
 @SwiftBank_Api_HostAddress = http://localhost:5271
+@token = {{login.response.body.token}}
 
-GET {{SwiftBank_Api_HostAddress}}/weatherforecast/
+### Verify the API and Swagger document are running
+GET {{SwiftBank_Api_HostAddress}}/swagger/v1/swagger.json
 Accept: application/json
 
 ###
+
+### Log in with the seeded development user
+# @name login
+POST {{SwiftBank_Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "Password123!"
+}
+
+###
+
+### Get the authenticated user's dashboard
+GET {{SwiftBank_Api_HostAddress}}/api/dashboard
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### Get the authenticated user's accounts
+GET {{SwiftBank_Api_HostAddress}}/api/accounts
+Authorization: Bearer {{token}}
+Accept: application/json

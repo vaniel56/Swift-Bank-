@@ -1,18 +1,18 @@
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net10.0\SwiftBank.Application.deps.json
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net10.0\SwiftBank.Application.dll
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net10.0\SwiftBank.Application.pdb
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.AssemblyInfoInputs.cache
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.AssemblyInfo.cs
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.csproj.CoreCompileInputs.cache
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.sourcelink.json
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.dll
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\refint\SwiftBank.Application.dll
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.pdb
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\ref\SwiftBank.Application.dll
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net10.0\SwiftBank.Domain.dll
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net10.0\SwiftBank.Infrastructure.dll
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net10.0\SwiftBank.Domain.pdb
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\bin\Debug\net10.0\SwiftBank.Infrastructure.pdb
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBank.Application.csproj.AssemblyReference.cache
-C:\Users\OLAMIDE-D\Desktop\Documents\ANGULAR\Swift-Bank-\SwiftBank_Api\SwiftBank.Application\obj\Debug\net10.0\SwiftBan.9E5B170D.Up2Date
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/bin/Debug/net10.0/SwiftBank.Application.deps.json
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/bin/Debug/net10.0/SwiftBank.Application.dll
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/bin/Debug/net10.0/SwiftBank.Application.pdb
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/bin/Debug/net10.0/SwiftBank.Domain.dll
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/bin/Debug/net10.0/SwiftBank.Infrastructure.dll
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/bin/Debug/net10.0/SwiftBank.Domain.pdb
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/bin/Debug/net10.0/SwiftBank.Infrastructure.pdb
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.csproj.AssemblyReference.cache
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.AssemblyInfoInputs.cache
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.AssemblyInfo.cs
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.csproj.CoreCompileInputs.cache
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.sourcelink.json
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBan.9E5B170D.Up2Date
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.dll
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/refint/SwiftBank.Application.dll
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/SwiftBank.Application.pdb
+/Users/mac/Documents/stanbic projct/Swift-Bank-/SwiftBank_Api/SwiftBank.Application/obj/Debug/net10.0/ref/SwiftBank.Application.dll

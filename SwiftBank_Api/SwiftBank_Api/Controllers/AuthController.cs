@@ -109,9 +109,6 @@ namespace SwiftBank_Api.Controllers
           expires: DateTime.UtcNow.AddSeconds(LIFETIME_SECONDS),
           signingCredentials: creds);
 
-      // Temporary debug — remove once verified
-      Console.WriteLine("JWT claims emitted: " + string.Join(", ", claims.Select(c => c.Type)));
-
       return (new JwtSecurityTokenHandler().WriteToken(token), LIFETIME_SECONDS);
     }
   }

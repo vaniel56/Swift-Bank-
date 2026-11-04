@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SwiftBank.Application.Interfaces;
@@ -9,7 +10,29 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException(
+        "ConnectionStrings:DefaultConnection is not configured.");
+
+if (builder.Environment.IsDevelopment())
+{
+    var sqlPassword = builder.Configuration["MSSQL_SA_PASSWORD"];
+    if (string.IsNullOrWhiteSpace(sqlPassword))
+    {
+        throw new InvalidOperationException(
+            "Set the MSSQL_SA_PASSWORD environment variable before starting the API in Development.");
+    }
+
+    var sqlConnection = new SqlConnectionStringBuilder(connectionString)
+    {
+        Password = sqlPassword
+    };
+    connectionString = sqlConnection.ConnectionString;
+}
+
 builder.Services.AddControllers();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -44,9 +67,7 @@ builder.Services.AddSwaggerGen(options =>
 
 // Database
 builder.Services.AddDbContext<SwiftBankDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    ));
+    options.UseSqlServer(connectionString));
 
 // Application services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -84,24 +105,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 Encoding.UTF8.GetBytes(jwtKey))
         };
 
-        // 🔍 Diagnostic logging — prints the real rejection reason if a token ever fails
-        options.Events = new JwtBearerEvents
-        {
-            OnAuthenticationFailed = ctx =>
-            {
-                Console.WriteLine("JWT FAILED: " + ctx.Exception.GetType().Name);
-                Console.WriteLine("MSG: " + ctx.Exception.Message);
-                if (ctx.Exception.InnerException != null)
-                    Console.WriteLine("INNER: " + ctx.Exception.InnerException.Message);
-                return Task.CompletedTask;
-            }
-        };
     });
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Apply pending migrations on startup
+// Apply pending migrations before serving requests.
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<SwiftBankDbContext>();
@@ -115,6 +124,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseExceptionHandler();
+app.UseStatusCodePages();
 app.UseHttpsRedirection();
 
 app.UseCors("DevCors");
