@@ -10,6 +10,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ✅ 1. Force the app to listen on port 8080 (Required for Azure/Docker)
+builder.WebHost.UseUrls("http://+:8080");
+
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException(
@@ -17,18 +20,17 @@ var connectionString =
 
 if (builder.Environment.IsDevelopment())
 {
+    // In Azure, the connection string will likely have the password already.
+    // This only modifies it if you are running locally and the env var is set.
     var sqlPassword = builder.Configuration["MSSQL_SA_PASSWORD"];
-    if (string.IsNullOrWhiteSpace(sqlPassword))
+    if (!string.IsNullOrWhiteSpace(sqlPassword))
     {
-        throw new InvalidOperationException(
-            "Set the MSSQL_SA_PASSWORD environment variable before starting the API in Development.");
+        var sqlConnection = new SqlConnectionStringBuilder(connectionString)
+        {
+            Password = sqlPassword
+        };
+        connectionString = sqlConnection.ConnectionString;
     }
-
-    var sqlConnection = new SqlConnectionStringBuilder(connectionString)
-    {
-        Password = sqlPassword
-    };
-    connectionString = sqlConnection.ConnectionString;
 }
 
 builder.Services.AddControllers();
@@ -71,16 +73,17 @@ builder.Services.AddDbContext<SwiftBankDbContext>(options =>
 
 // Application services
 builder.Services.AddScoped<IAuthService, AuthService>();
-
 builder.Services.AddScoped<IAccountService, AccountService>();
-
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 
-// CORS for Angular dev server
+// ✅ 2. CORS - Read from config for production, fallback to localhost for dev
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() 
+                     ?? new[] { "http://localhost:4200" };
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DevCors", policy =>
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
@@ -104,7 +107,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(jwtKey))
         };
-
     });
 builder.Services.AddAuthorization();
 
